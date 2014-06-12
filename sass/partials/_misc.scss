@@ -1,0 +1,6 @@
+.panel {
+    @include border-radius();
+    border: 1px solid #222;
+    border-bottom-width: 3px;
+    padding: $padding;
+}

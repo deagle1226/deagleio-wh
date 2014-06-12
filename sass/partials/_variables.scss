@@ -1,0 +1,72 @@
+$border-radius: 2px;
+$padding: 20px;
+
+// -- TYPOGRAPHY -- //
+$font-family-sans: 'Roboto', sans-serif;
+$font-family-serif: 'Roboto Slab', serif;
+
+$font-size-base:          14px;
+$font-size-large:         ceil(($font-size-base * 1.25)); // ~18px
+$font-size-small:         ceil(($font-size-base * 0.85)); // ~12px
+
+$font-size-h1:            floor(($font-size-base * 2.6)); // ~36px
+$font-size-h2:            floor(($font-size-base * 2.15)); // ~30px
+$font-size-h3:            ceil(($font-size-base * 1.7)); // ~24px
+$font-size-h4:            ceil(($font-size-base * 1.25)); // ~18px
+$font-size-h5:            $font-size-base;
+$font-size-h6:            ceil(($font-size-base * 0.85)); // ~12px
+
+$line-height-base:        1.428571429; // 20/14
+$line-height-computed:    floor(($font-size-base * $line-height-base)); // ~20px
+
+$headings-font-family:    inherit;
+$headings-font-weight:    bold;
+$headings-line-height:    2;
+
+// -- COLORS -- //
+$text-shadow: rgba(0,0,0,0.25);
+$darkGray: #555555;
+
+$text-default: #555;
+$background-default: #fff;
+$background-default-hover: #e6e6e6;
+$background-default-light: rgba(0,0,0,0.05);
+$border-default: #ddd;
+$border-default-hover: #ccc;
+$border-default-light: #dfdfdf;
+
+// RED
+$background-red:            #d9534f;
+$background-red-hover:      #d2322d;
+$background-red-light:      #f2dede;
+$border-red:                darken(#d43f3a, 5%);
+$border-red-light:          lighten($border-red, 20%);
+$border-red-hover:          darken(#ac2925, 3%);
+$text-red:                  #a94442;
+
+// GREEN
+$background-green:          #5cb85c;
+$background-green-hover:    #47a447;
+$background-green-light:    #dff0d8;
+$border-green:              darken(#4cae4c, 5%);
+$border-green-light:        lighten($border-green, 20%);
+$border-green-hover:        #398439;
+$text-green:                #3c763d;
+
+// BLUE
+$background-blue:           #428bca;
+$background-blue-hover:     #3276b1;
+$background-blue-light:     #d9edf7;
+$border-blue:               darken(#357ebd, 5%);
+$border-blue-light:         lighten($border-blue, 20%);
+$border-blue-hover:         #285e8e;
+$text-blue:                 #31708f;
+
+// ORANGE
+$background-orange:         darken(desaturate(#f0ad4e, 20%), 10%);
+$background-orange-hover:   darken($background-orange, 5%);
+$background-orange-light:   #fcf8e3;
+$border-orange:             darken(#eea236, 5%);
+$border-orange-light:       lighten($border-orange, 20%);
+$border-orange-hover:       #d58512;
+$text-orange:               #8a6d3b;

@@ -1,0 +1,99 @@
+$nav-shadow: -3px;
+$nav-shadow-active: $nav-shadow * -1;
+nav {
+    display: block;
+    margin-bottom: $padding;
+    @include transition($time: 100ms);
+    
+    &.fixed {
+        position: fixed;
+        top: 0;
+        background: rgba(#e5e5e5, 0.85);
+        left: 0;
+        right: 17px;
+        padding: 5px 0;
+        z-index: 99;
+        box-shadow: 0px 5px 0px 0px rgba(#e5e5e5, 0.5);
+        
+//        div:not(.active), a:not(.active) {
+//            background: #e5e5e5;
+//            
+//            &:hover {
+//                background: darken(#e5e5e5, 5%) !important;
+//            }
+//        }
+    }
+    
+    &.pills {
+        div, a {
+            vertical-align: middle;
+            margin-bottom: 3px;
+        }
+        
+        div:not(.button), a:not(.button) {
+            display: inline-block;
+            @include border-radius();
+            padding: 5px 15px 8px;
+            margin-right: 5px;
+            text-decoration: none;
+            @include transition();
+            
+            
+            &:hover {
+                cursor: pointer;
+                background: rgba(0,0,0,0.03);
+                @include box-shadow(rgba(0,0,0,0.05), $nav-shadow);
+            }
+            
+            &.active {
+                background: $darkGray;
+                color: #fff;
+                -webkit-text-stroke: 0;
+                @include box-shadow(rgba(0,0,0,0.15), $nav-shadow);
+            }
+            
+            &:active {
+                padding: 8px 15px 5px;
+                @include box-shadow(rgba(0,0,0,0.05), $nav-shadow-active);
+            }
+            
+            &.active:active {
+                padding: 5px 15px 8px;
+                @include box-shadow(rgba(0,0,0,0.15), $nav-shadow);
+            }
+        }
+        
+        &.center {
+            text-align: center;
+        }
+        
+        &.green {
+            div:not(.button), a:not(.button) {
+                 &.active {
+                     background: $background-green;
+                 }
+            }
+        }
+    }
+    
+    &.list {
+        div, a {
+            color: #fff;
+            display: block;
+            
+            &:after {
+                content: '>';
+            }
+            
+            &:hover {
+                cursor: pointer;
+                -moz-transform: translateX(10px);
+                -webkit-transform: translateX(10px);
+                -o-transform: translateX(10px);
+                -ms-transform: translateX(10px);
+                transform: translateX(10px);
+                @include transition();
+            }
+        }
+    }
+}

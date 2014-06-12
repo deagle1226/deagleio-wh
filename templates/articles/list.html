@@ -1,0 +1,35 @@
+{# LIST VIEW OF ALL articles #}
+{# You can find a full list of variables to use on this page in your CMS. #}
+
+{% extends "templates/partials/base.html" %}
+
+{% block content %}
+
+  {# Copy this to any page you want articles data on. #}
+  {% set data = get('articles') %}
+
+  {# This is how you set pagination. #}
+  {% set data = paginate(data, 5) %}
+
+  {# Scaffolding only outputs the object.name, but feel to use any of the fields from your CMS form here. #}
+  <section>
+    {% for id, article in data %}
+      <article>
+        <header>
+          <h3>{{ article.name }}</h3>
+          <div class="deck">
+            {{ article.deck }}
+          </div>
+          <h5 class="byLine">{{ article.publish_date|date('F d Y') }}</h5>
+        </header>
+        <div class="body hidden">
+          {{ article.body|markdown }}
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+
+  {# The actual pagination template, feel free to edit or replace the default one. #}
+  {% include "templates/partials/paginator.html" %}
+
+{% endblock %}

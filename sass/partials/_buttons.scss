@@ -1,0 +1,92 @@
+$button-shadow: -2px;
+$button-shadow-active: $button-shadow * -1;
+
+@mixin box-shadow($color, $vert: $button-shadow)  {
+    box-shadow: inset 0px $vert 0px 0px $color;
+    //box-shadow: 0 1px 2px -1px rgba(255,255,255,.5) inset,0 -2px 0 0 rgba(0,0,0,.1) inset;
+}
+
+.button {
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,0.15);
+    @include box-shadow(rgba(0,0,0,0.15));
+    @include border-radius();
+    @include transition();
+    font-family: $font-family-sans;
+    padding: 5px 10px 7px;
+    font-size: $font-size-small;
+     -webkit-text-stroke: 0;
+    background: #555;
+    color: #fff;
+    text-decoration: none;
+    vertical-align: middle;
+    
+    &:hover {
+        cursor: pointer;
+        background-color: darken(#555, 8%);
+        border-color: rgba(0,0,0,0.2);
+    }
+    
+    &:active {
+        @include box-shadow(rgba(0,0,0,0.2), $button-shadow-active);
+        padding: 7px 10px 5px;
+    }
+    
+    &.block {
+        display: block;
+        margin-top: 3px;
+    }
+    
+    &.dark {
+        background: #333;
+        color: #fff;
+        
+        &:hover {
+            background: darken(#333, 3%);
+        }
+    }
+    
+    &.red {
+        color: #fff;
+        background-color: $background-red;
+        
+        &:hover {
+            background-color: $background-red-hover;
+        }
+    }
+    
+    &.green, &.active {
+        color: #fff;
+        background-color: $background-green;
+        
+        &:hover {
+            background-color: $background-green-hover;
+        }
+    }
+    
+    &.blue {
+        color: #fff;
+        background-color: $background-blue;
+        
+        &:hover {
+            background-color: $background-blue-hover;
+        }
+    }
+    
+    &.orange {
+        color: #fff;
+        background-color: $background-orange;
+        
+        &:hover {
+            background-color: $background-orange-hover;
+        }
+    }
+}
+
+.button-group {
+    display: block;
+    
+    .button {
+        vertical-align: middle;
+    }
+}

@@ -1,0 +1,19 @@
+@mixin border-radius($radius: $border-radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transition($target: all, $time: 150ms, $behavior: ease-in-out) {
+    -webkit-transition: $target $time $behavior;
+    -moz-transition: $target $time $behavior;
+    -ms-transition: $target $time $behavior;
+    -o-transition: $target $time $behavior;
+    transition: $target $time $behavior;
+}
+
+@mixin button() {
+    
+    display: inline-block;
+}

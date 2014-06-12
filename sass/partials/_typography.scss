@@ -1,0 +1,188 @@
+body {
+    font-family: $font-family-serif;
+    -webkit-text-stroke: 0.2px;
+    font-size: $font-size-base;
+    color: $text-default;
+    background: #e5e5e5;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.text-red {
+    color: $text-red;
+}
+.text-green {
+    color: $text-green;
+}
+.text-blue {
+    color: $text-blue;
+}
+.text-orange {
+    color: $text-orange;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    -webkit-text-stroke: 0.6px;
+    line-height: $headings-line-height;
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+
+    &.sub {
+        opacity: 0.5;
+        font-family: $font-family-sans;
+        font-weight: 700;
+    }
+
+    &.inline {
+        display: inline-block;
+    }
+
+    small {
+        opacity: 0.5;
+        font-size: 75%;
+    }
+
+    &.underline {
+        border-bottom: 3px solid $text-default;
+        @include border-radius();
+    }
+    
+    &.green {
+        color: $background-green;
+    }
+    
+    &.white {
+        color: #fff;
+
+        &.underline {
+            border-bottom: 1px solid #fff;
+        }
+    }
+}
+
+h1 {
+    font-size: $font-size-h1;
+}
+
+h2 {
+    font-size: $font-size-h2;
+}
+
+h3 {
+    font-size: $font-size-h3;
+}
+
+h4 {
+    font-size: $font-size-h4;
+    -webkit-text-stroke: 0.4px;
+}
+
+h5 {
+    font-size: $font-size-h5;
+    -webkit-text-stroke: 0.3px;
+}
+
+h6 {
+    font-size: $font-size-h6;
+    -webkit-text-stroke: 0.2px;
+}
+
+p {
+    line-height: 1.5em;
+
+    &.lead {
+        font-size: 125%;
+        font-weight: bold;
+    }
+}
+
+main {
+    article {
+        margin: auto auto $padding auto;
+        border-bottom: 3px solid rgba(#555, 0.25);
+        //border-bottom-width: 3px;
+        @include border-radius();
+        @include transition();
+        width: calc(100% - ($padding*2));
+        max-width: 800px;
+        overflow: hidden;
+        background: #fff;
+        
+        &:hover {
+            
+        }
+
+        header {
+            padding: $padding;
+            padding-top: $padding/2;
+            display: block;
+            padding-bottom: $padding;
+            border-bottom: 1px solid #dfdfdf;
+            margin-bottom: -1px;
+            position: relative;
+            @include transition(500ms);
+            
+            .deck {
+                font-family: $font-family-sans;
+                font-weight: 300;
+                font-size: $font-size-large;
+                padding: $padding/2 0;
+                opacity: 0.75;
+            }
+            
+            .byLine {
+                font-family: $font-family-sans;
+                font-weight: 400;
+                opacity: 0.75;
+            }
+            
+            &:hover {
+                cursor: pointer;
+                
+                &:after {
+                    opacity: 0.1;
+                }
+            }
+            
+            &:after {
+                content: '\25BC';
+                position: absolute;
+                bottom: 0; left: 0; right: 0;
+                text-align: center;
+                opacity: 0;
+                font-weight: bold;
+                font-size: $font-size-large*2;
+                @include transition(300ms);
+                -moz-transform: scale(1.2, 1);
+                -webkit-transform: scale(2, 1);
+                -o-transform: scale(2, 1);
+                -ms-transform: scale(2, 1);
+                transform: scale(2, 1);
+            }
+        }
+        
+        &.active {
+            header {
+
+                &:after {
+                    -moz-transform: rotate(180deg) scale(2, 1);
+                    -webkit-transform: rotate(180deg) scale(2, 1);
+                    -o-transform: rotate(180deg) scale(2, 1);
+                    -ms-transform: rotate(180deg) scale(2, 1);
+                    transform: rotate(180deg) scale(2, 1);
+                }
+            }
+        }
+        
+        div.body {
+            //margin-top: $padding;
+            //border-top: 1px solid #ccc;
+            padding: $padding;
+            padding-top: $padding / 2;
+        }
+    }
+}
