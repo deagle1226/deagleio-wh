@@ -1,31 +1,37 @@
 {# YOUR HOMEPAGE #}
 
-{# First time seeing extend or blocks? Want to know how it works? Tutorial here: http://www.webhook.com #}
+{# LIST VIEW OF ALL articles #}
+{# You can find a full list of variables to use on this page in your CMS. #}
+
 {% extends "templates/partials/base.html" %}
 
 {% block content %}
 
-  <h1>Hello world!</h1>
+  {# Copy this to any page you want articles data on. #}
+  {% set data = get('articles') %}
 
-  <p>This is your homepage, located at /pages/index.html.</p>
+  {# This is how you set pagination. #}
+  {% set data = paginate(data, 5) %}
 
-  <p><a href="/cms/">Looking for the CMS?</a></p>
-
-  {# Grabs the data to list all the content types (set as multiple) from the CMS. #}
-  {% set types = getTypes() %}
-
-  {# If you have at least content page type, we show a list. #}
-  {% if types|size !== 0 %}
-
-    <h3>Content types you've created in the CMS so far.</h3>
-
-    <ul>
-    {% for type in types %}
-      <li><a href="{{ url(type) }}">{{ type.name }}</a></li>
+  <section>
+    {% for id, article in data %}
+      <article>
+        <header>
+          <h3>{{ article.name }}</h3>
+          <div class="deck">
+            {{ article.deck }}
+          </div>
+          <h5 class="byLine">{{ article.publish_date|date('F d Y') }}</h5>
+        </header>
+        <div class="body hidden">
+          {{ article.body|markdown }}
+        </div>
+      </article>
     {% endfor %}
-    </ul>
+  </section>
 
-  {% endif %}
-
+  {# The actual pagination template, feel free to edit or replace the default one. #}
+  {% include "templates/partials/paginator.html" %}
 
 {% endblock %}
+

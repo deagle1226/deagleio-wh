@@ -695,7 +695,8 @@ nav {
     box-shadow: 0px 5px 0px 0px rgba(229, 229, 229, 0.5); }
   nav.pills div, nav.pills a {
     vertical-align: middle;
-    margin-bottom: 3px; }
+    margin-bottom: 3px;
+    color: #555; }
   nav.pills div:not(.button), nav.pills a:not(.button) {
     display: inline-block;
     -webkit-border-radius: 2px;
@@ -723,7 +724,7 @@ nav {
       padding: 8px 15px 5px;
       box-shadow: inset 0px 3px 0px 0px rgba(0, 0, 0, 0.05); }
     nav.pills div:not(.button).active:active, nav.pills a:not(.button).active:active {
-      padding: 5px 15px 8px;
+      padding: 8px 15px 5px !important;
       box-shadow: inset 0px 3px 0px 0px rgba(0, 0, 0, 0.15); }
   nav.pills.center {
     text-align: center; }
@@ -790,6 +791,16 @@ nav {
     right: 0;
     left: 0;
     z-index: 9998; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  background: #555;
+  line-height: 40px; }
 
 #stripe1, #stripe2, #stripe3 {
   position: absolute;
