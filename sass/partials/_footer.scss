@@ -1,0 +1,11 @@
+footer {
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+	text-align: center;
+	line-height: 40px;
+	color: rgba(255,255,255,0.75);
+	background: #555;
+	font-family: $font-family-sans;
+	font-weight: 300;
+	-webkit-text-stroke: 0;
+}

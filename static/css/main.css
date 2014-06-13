@@ -432,6 +432,9 @@ p {
     font-size: 125%;
     font-weight: bold; }
 
+main section {
+  max-width: 800px;
+  margin: 0 auto; }
 main article {
   margin: auto auto 20px auto;
   border-bottom: 3px solid rgba(85, 85, 85, 0.25);
@@ -445,7 +448,6 @@ main article {
   -o-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
   width: calc(100% - ($padding*2));
-  max-width: 800px;
   overflow: hidden;
   background: #fff; }
   main article header {
@@ -470,31 +472,12 @@ main article {
     main article header .byLine {
       font-family: "Roboto", sans-serif;
       font-weight: 400;
-      opacity: 0.75; }
+      opacity: 0.75;
+      padding-top: 5px; }
     main article header:hover {
       cursor: pointer; }
       main article header:hover:after {
         opacity: 0.1; }
-    main article header:after {
-      content: '\25BC';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      text-align: center;
-      opacity: 0;
-      font-weight: bold;
-      font-size: 36px;
-      -webkit-transition: 300ms 150ms ease-in-out;
-      -moz-transition: 300ms 150ms ease-in-out;
-      -ms-transition: 300ms 150ms ease-in-out;
-      -o-transition: 300ms 150ms ease-in-out;
-      transition: 300ms 150ms ease-in-out;
-      -moz-transform: scale(1.2, 1);
-      -webkit-transform: scale(2, 1);
-      -o-transform: scale(2, 1);
-      -ms-transform: scale(2, 1);
-      transform: scale(2, 1); }
   main article.active header:after {
     -moz-transform: rotate(180deg) scale(2, 1);
     -webkit-transform: rotate(180deg) scale(2, 1);
@@ -724,7 +707,7 @@ nav {
       padding: 8px 15px 5px;
       box-shadow: inset 0px 3px 0px 0px rgba(0, 0, 0, 0.05); }
     nav.pills div:not(.button).active:active, nav.pills a:not(.button).active:active {
-      padding: 8px 15px 5px !important;
+      padding: 8px 15px 5px;
       box-shadow: inset 0px 3px 0px 0px rgba(0, 0, 0, 0.15); }
   nav.pills.center {
     text-align: center; }
@@ -798,9 +781,12 @@ footer {
   left: 0;
   right: 0;
   text-align: center;
-  color: #fff;
+  line-height: 40px;
+  color: rgba(255, 255, 255, 0.75);
   background: #555;
-  line-height: 40px; }
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  -webkit-text-stroke: 0; }
 
 #stripe1, #stripe2, #stripe3 {
   position: absolute;
@@ -809,7 +795,7 @@ footer {
   background: #d49337;
   top: 0;
   bottom: 0;
-  z-index: 0; }
+  z-index: 1; }
 
 #stripe2 {
   left: 10%;
@@ -825,8 +811,11 @@ footer {
   display: none; }
 
 body {
-  width: 100%;
-  overflow: hidden; }
+  width: 100%; }
+
+a {
+  color: #555;
+  text-decoration: none; }
 
 #logo {
   font-size: 36px;
@@ -964,7 +953,7 @@ main {
   overflow-y: auto;
   height: calc(100% - 40px);
   position: relative;
-  z-index: 1; }
+  z-index: 2; }
 
 #loading {
   position: absolute;

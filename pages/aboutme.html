@@ -1,0 +1,13 @@
+{% set about = get('aboutme') %}
+{% extends "templates/partials/base.html" %}
+{% block content %}
+
+<section>
+  <article>
+    <header>
+      <div class="deck">{{ about.body|markdown }}</div> 
+    </header>
+  </article>
+</section>
+
+{% endblock %}

@@ -4,7 +4,7 @@ module.exports = {
     init: function() {
         var main = $('main');
         this.bind.nav(main);
-        this.bind.article();
+        //this.bind.article();
     },
 
     bind: {

@@ -101,6 +101,10 @@ p {
 }
 
 main {
+    section {
+        max-width: 800px;
+        margin: 0 auto;
+    }
     article {
         margin: auto auto $padding auto;
         border-bottom: 3px solid rgba(#555, 0.25);
@@ -108,7 +112,6 @@ main {
         @include border-radius();
         @include transition();
         width: calc(100% - ($padding*2));
-        max-width: 800px;
         overflow: hidden;
         background: #fff;
         
@@ -138,6 +141,7 @@ main {
                 font-family: $font-family-sans;
                 font-weight: 400;
                 opacity: 0.75;
+                padding-top: 5px;
             }
             
             &:hover {
@@ -148,21 +152,21 @@ main {
                 }
             }
             
-            &:after {
-                content: '\25BC';
-                position: absolute;
-                bottom: 0; left: 0; right: 0;
-                text-align: center;
-                opacity: 0;
-                font-weight: bold;
-                font-size: $font-size-large*2;
-                @include transition(300ms);
-                -moz-transform: scale(1.2, 1);
-                -webkit-transform: scale(2, 1);
-                -o-transform: scale(2, 1);
-                -ms-transform: scale(2, 1);
-                transform: scale(2, 1);
-            }
+            // &:after {
+            //     content: '\25BC';
+            //     position: absolute;
+            //     bottom: 0; left: 0; right: 0;
+            //     text-align: center;
+            //     opacity: 0;
+            //     font-weight: bold;
+            //     font-size: $font-size-large*2;
+            //     @include transition(300ms);
+            //     -moz-transform: scale(1.2, 1);
+            //     -webkit-transform: scale(2, 1);
+            //     -o-transform: scale(2, 1);
+            //     -ms-transform: scale(2, 1);
+            //     transform: scale(2, 1);
+            // }
         }
         
         &.active {
