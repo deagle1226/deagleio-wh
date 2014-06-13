@@ -59,7 +59,7 @@ nav {
             
             &.active:active {
                 padding: 5px 15px 8px;
-                @include box-shadow(rgba(0,0,0,0.15), $nav-shadow);
+                @include box-shadow(rgba(0,0,0,0.15), $nav-shadow-active);
             }
         }
         

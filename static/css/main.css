@@ -724,7 +724,7 @@ nav {
       box-shadow: inset 0px 3px 0px 0px rgba(0, 0, 0, 0.05); }
     nav.pills div:not(.button).active:active, nav.pills a:not(.button).active:active {
       padding: 5px 15px 8px;
-      box-shadow: inset 0px -3px 0px 0px rgba(0, 0, 0, 0.15); }
+      box-shadow: inset 0px 3px 0px 0px rgba(0, 0, 0, 0.15); }
   nav.pills.center {
     text-align: center; }
   nav.pills.green div:not(.button).active, nav.pills.green a:not(.button).active {
