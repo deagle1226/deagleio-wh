@@ -114,79 +114,41 @@ main {
         width: calc(100% - ($padding*2));
         overflow: hidden;
         background: #fff;
+        padding: $padding;
+        padding-top: $padding/2;
+
+        p {
+            font-weight: 300;
+            font-size: $font-size-large;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
         
         &:hover {
             
         }
 
-        header {
-            padding: $padding;
-            padding-top: $padding/2;
-            display: block;
-            padding-bottom: $padding;
-            border-bottom: 1px solid #dfdfdf;
-            margin-bottom: -1px;
-            position: relative;
-            @include transition(500ms);
-            
-            .deck {
-                font-family: $font-family-sans;
-                font-weight: 300;
-                font-size: $font-size-large;
-                padding: $padding/2 0;
-                opacity: 0.75;
-            }
-            
-            .byLine {
-                font-family: $font-family-sans;
-                font-weight: 400;
-                opacity: 0.75;
-                padding-top: 5px;
-            }
-            
-            &:hover {
-                cursor: pointer;
-                
-                &:after {
-                    opacity: 0.1;
-                }
-            }
-            
-            // &:after {
-            //     content: '\25BC';
-            //     position: absolute;
-            //     bottom: 0; left: 0; right: 0;
-            //     text-align: center;
-            //     opacity: 0;
-            //     font-weight: bold;
-            //     font-size: $font-size-large*2;
-            //     @include transition(300ms);
-            //     -moz-transform: scale(1.2, 1);
-            //     -webkit-transform: scale(2, 1);
-            //     -o-transform: scale(2, 1);
-            //     -ms-transform: scale(2, 1);
-            //     transform: scale(2, 1);
-            // }
+        .deck {
+            font-family: $font-family-sans;
+            font-weight: 300;
+            font-size: $font-size-large;
+            padding: $padding/2 0;
+            opacity: 0.75;
         }
         
-        &.active {
-            header {
+        .byLine {
+            font-family: $font-family-sans;
+            font-weight: 400;
+            opacity: 0.75;
+            padding-top: 5px;
+        }
+    }
 
-                &:after {
-                    -moz-transform: rotate(180deg) scale(2, 1);
-                    -webkit-transform: rotate(180deg) scale(2, 1);
-                    -o-transform: rotate(180deg) scale(2, 1);
-                    -ms-transform: rotate(180deg) scale(2, 1);
-                    transform: rotate(180deg) scale(2, 1);
-                }
+    a {
+        article {
+            &:hover {
+                background: #f8f8f8;
             }
-        }
-        
-        div.body {
-            //margin-top: $padding;
-            //border-top: 1px solid #ccc;
-            padding: $padding;
-            padding-top: $padding / 2;
         }
     }
 }

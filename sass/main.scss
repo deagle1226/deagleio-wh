@@ -10,7 +10,7 @@
 @import 'partials/footer';
 
 #stripe1, #stripe2, #stripe3 {
-    position: absolute;
+    position: fixed;
     left: 5%;
     right: 90%;
     background: $background-orange;

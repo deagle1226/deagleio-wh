@@ -355,7 +355,7 @@ th {
   padding: 0; }
 
 body {
-  font-family: "Roboto Slab", serif;
+  font-family: "Titillium Web", sans-serif;
   -webkit-text-stroke: 0.2px;
   font-size: 14px;
   color: #555555;
@@ -385,7 +385,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold; }
   h1.sub, h2.sub, h3.sub, h4.sub, h5.sub, h6.sub {
     opacity: 0.5;
-    font-family: "Roboto", sans-serif;
+    font-family: "Titillium Web", sans-serif;
     font-weight: 700; }
   h1.inline, h2.inline, h3.inline, h4.inline, h5.inline, h6.inline {
     display: inline-block; }
@@ -449,44 +449,27 @@ main article {
   transition: all 150ms ease-in-out;
   width: calc(100% - ($padding*2));
   overflow: hidden;
-  background: #fff; }
-  main article header {
-    padding: 20px;
-    padding-top: 10px;
-    display: block;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #dfdfdf;
-    margin-bottom: -1px;
-    position: relative;
-    -webkit-transition: 500ms 150ms ease-in-out;
-    -moz-transition: 500ms 150ms ease-in-out;
-    -ms-transition: 500ms 150ms ease-in-out;
-    -o-transition: 500ms 150ms ease-in-out;
-    transition: 500ms 150ms ease-in-out; }
-    main article header .deck {
-      font-family: "Roboto", sans-serif;
-      font-weight: 300;
-      font-size: 18px;
-      padding: 10px 0;
-      opacity: 0.75; }
-    main article header .byLine {
-      font-family: "Roboto", sans-serif;
-      font-weight: 400;
-      opacity: 0.75;
-      padding-top: 5px; }
-    main article header:hover {
-      cursor: pointer; }
-      main article header:hover:after {
-        opacity: 0.1; }
-  main article.active header:after {
-    -moz-transform: rotate(180deg) scale(2, 1);
-    -webkit-transform: rotate(180deg) scale(2, 1);
-    -o-transform: rotate(180deg) scale(2, 1);
-    -ms-transform: rotate(180deg) scale(2, 1);
-    transform: rotate(180deg) scale(2, 1); }
-  main article div.body {
-    padding: 20px;
-    padding-top: 10px; }
+  background: #fff;
+  padding: 20px;
+  padding-top: 10px; }
+  main article p {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    opacity: 0.8; }
+  main article .deck {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    padding: 10px 0;
+    opacity: 0.75; }
+  main article .byLine {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 400;
+    opacity: 0.75;
+    padding-top: 5px; }
+main a article:hover {
+  background: #f8f8f8; }
 
 .button {
   display: inline-block;
@@ -501,7 +484,7 @@ main article {
   -ms-transition: all 150ms ease-in-out;
   -o-transition: all 150ms ease-in-out;
   transition: all 150ms ease-in-out;
-  font-family: "Roboto", sans-serif;
+  font-family: "Titillium Web", sans-serif;
   padding: 5px 10px 7px;
   font-size: 12px;
   -webkit-text-stroke: 0;
@@ -610,7 +593,7 @@ select {
     border-bottom-width: 3px;
     border-right: none;
     color: rgba(255, 255, 255, 0.5);
-    font-family: "Roboto", sans-serif;
+    font-family: "Titillium Web", sans-serif;
     -webkit-text-stroke: 0;
     font-size: 12px;
     line-height: 18px;
@@ -679,7 +662,8 @@ nav {
   nav.pills div, nav.pills a {
     vertical-align: middle;
     margin-bottom: 3px;
-    color: #555; }
+    color: #555;
+    font-size: 16px; }
   nav.pills div:not(.button), nav.pills a:not(.button) {
     display: inline-block;
     -webkit-border-radius: 2px;
@@ -761,7 +745,7 @@ nav {
       position: absolute;
       top: 5px;
       right: 5px;
-      font-family: "Roboto", sans-serif;
+      font-family: "Titillium Web", sans-serif;
       font-weight: bold;
       opacity: 0.75; }
       .modal-box .modal .modal-close:hover {
@@ -776,20 +760,16 @@ nav {
     z-index: 9998; }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   text-align: center;
   line-height: 40px;
   color: rgba(255, 255, 255, 0.75);
   background: #555;
-  font-family: "Roboto", sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 300;
   -webkit-text-stroke: 0; }
 
 #stripe1, #stripe2, #stripe3 {
-  position: absolute;
+  position: fixed;
   left: 5%;
   right: 90%;
   background: #d49337;
@@ -823,7 +803,7 @@ a {
   padding: 20px 0;
   -webkit-text-stroke: 2px;
   line-height: 80px;
-  font-family: "Roboto Slab", serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 100;
   font-size: 70px;
   text-align: center;
@@ -838,7 +818,7 @@ a {
     text-decoration: none; }
   #logo span {
     display: inline-block;
-    font-family: "Roboto", sans-serif;
+    font-family: "Titillium Web", sans-serif;
     font-size: 56px;
     color: #fff;
     background: #d49337;
@@ -885,7 +865,7 @@ a {
       line-height: calc(82px / 3); }
 
 #description {
-  font-family: "Roboto", sans-serif;
+  font-family: "Titillium Web", sans-serif;
   font-weight: 100;
   font-size: 18px;
   text-align: center;
@@ -901,7 +881,7 @@ a {
   right: 100%;
   bottom: 0;
   padding: 20px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Titillium Web", sans-serif;
   -webkit-transition: all 300ms ease-in-out;
   -moz-transition: all 300ms ease-in-out;
   -ms-transition: all 300ms ease-in-out;
@@ -932,7 +912,7 @@ aside {
     text-align: center;
     line-height: 36px;
     color: #fff;
-    font-family: "Roboto", sans-serif;
+    font-family: "Titillium Web", sans-serif;
     font-size: 12px;
     -webkit-text-stroke: 0;
     opacity: 0.5; }

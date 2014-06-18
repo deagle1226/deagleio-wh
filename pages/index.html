@@ -7,31 +7,7 @@
 
 {% block content %}
 
-  {# Copy this to any page you want articles data on. #}
-  {% set data = get('articles') %}
-
-  {# This is how you set pagination. #}
-  {% set data = paginate(data, 5) %}
-
-  <section>
-    {% for id, article in data %}
-      <article>
-        <header>
-          <h3>{{ article.name }}</h3>
-          <div class="deck">
-            {{ article.deck }}
-          </div>
-          <h5 class="byLine">{{ article.publish_date|date('F d Y') }}</h5>
-        </header>
-        <div class="body hidden">
-          {{ article.body|markdown }}
-        </div>
-      </article>
-    {% endfor %}
-  </section>
-
-  {# The actual pagination template, feel free to edit or replace the default one. #}
-  {% include "templates/partials/paginator.html" %}
+  {% include "templates/partials/article_list.html" %}
 
 {% endblock %}
 

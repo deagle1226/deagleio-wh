@@ -12,15 +12,19 @@
 		</div>
 		<div id="description">{{ getSetting('site_description') }}</div>
 
-		{% set articles = get('articles') %}
+		{% set types = getTypes() %}
 		<nav id="main-nav" class="pills center">
-		    <a href="/articles" {% if getCurrentUrl()|startsWith('/articles') %}class="active" {% endif %}>Blog</a>
-		    <a href="/aboutme" {% if getCurrentUrl()|startsWith('/aboutme') %}class="active" {% endif %}>About Me</a>
+		{% for type in types %}
+	    	<a href="{{ url(type) }}" {% if getCurrentUrl()|startsWith(url(type)) %}class="active" {% endif %}>{{ type.name }}</a>
+    	{% endfor %}
+			<a href="/aboutme" {% if getCurrentUrl()|startsWith('/aboutme') %}class="active" {% endif %}>About Me</a>
 		    <a href="/cms/">CMS</a>
 		</nav>
 		<nav id="main-nav-fixed" class="pills center fixed" style="display:none;">
-			<a href="/articles/" id="nav-0" class="active">Blog</a>
-			<a href="/aboutme/" id="nav-1">About Me</a>
-			<a href="/cms/">CMS</a>
+		{% for type in types %}
+	    	<a href="{{ url(type) }}" {% if getCurrentUrl()|startsWith(url(type)) %}class="active" {% endif %}>{{ type.name }}</a>
+    	{% endfor %}
+			<a href="/aboutme" {% if getCurrentUrl()|startsWith('/aboutme') %}class="active" {% endif %}>About Me</a>
+		    <a href="/cms/">CMS</a>
 		</nav>
 	</header>
