@@ -1,0 +1,40 @@
+{% set experiences = get('workexperiences') %}
+{% set skills = get('skills') %}
+{% set education = get('education') %}
+
+{% extends "templates/partials/base.html" %}
+{% block content %}
+
+<article>
+   	Work Experiences
+
+	{% for experience in experiences %}
+  	<div>
+  		<b>{{ experience.name|upper }} - {{ experience.employer|upper }}</b>
+  		{{ experience.description|markdown }}
+  		{{ experience.from|date('F Y') }} - {{ experience.to|date('F Y') }}
+  		({{ experience.address.city }}, {{ experience.address.state }})
+	</div>
+    {% endfor %}
+
+</article>
+
+<article>
+	Skills
+
+	{{ skills.list|markdown }}
+</article>
+
+<article>
+	Education
+
+	{% for thing in education %}
+	<div>
+		<b>{{ thing.name }} - {{ thing.address.city }}, {{ thing.address.state }}</b>
+		{{ thing.description|markdown }}
+		{{ thing.from|date('Y') }} - {{ thing.to|date('Y') }}
+	</div>
+	{% endfor %}
+</article>
+
+{% endblock %}

@@ -1,30 +1,24 @@
-<div id="stripe1"></div>
-<div id="stripe2"></div>
-<div id="stripe3"></div>
+<header>
+	<div id="logo">
+		<a href="/">deagle<span>io</span></a>
+	</div>
+	<div id="logo" class="fixed" style="display:none;">
+		<a href="/">deagle<span>io</span></a>
+	</div>
+	<div id="description">{{ getSetting('site_description') }}</div>
 
-<main>
-	<header>
-		<div id="logo">
-			<a href="/">deagle<span>io</span></a>
-		</div>
-		<div id="logo" class="fixed" style="display:none;">
-			<a href="/">deagle<span>io</span></a>
-		</div>
-		<div id="description">{{ getSetting('site_description') }}</div>
-
-		{% set types = getTypes() %}
-		<nav id="main-nav" class="pills center">
-		{% for type in types %}
-	    	<a href="{{ url(type) }}" {% if getCurrentUrl()|startsWith(url(type)) %}class="active" {% endif %}>{{ type.name }}</a>
-    	{% endfor %}
-			<a href="/aboutme" {% if getCurrentUrl()|startsWith('/aboutme') %}class="active" {% endif %}>About Me</a>
-		    <a href="/cms/">CMS</a>
-		</nav>
-		<nav id="main-nav-fixed" class="pills center fixed" style="display:none;">
-		{% for type in types %}
-	    	<a href="{{ url(type) }}" {% if getCurrentUrl()|startsWith(url(type)) %}class="active" {% endif %}>{{ type.name }}</a>
-    	{% endfor %}
-			<a href="/aboutme" {% if getCurrentUrl()|startsWith('/aboutme') %}class="active" {% endif %}>About Me</a>
-		    <a href="/cms/">CMS</a>
-		</nav>
-	</header>
+	{% set types = getTypes() %}
+	<nav id="main-nav" class="pills center">
+		<a href="/articles" {% if getCurrentUrl()|startsWith('/articles') || getCurrentUrl() == '/' %}class="active" {% endif %}>Blog</a>
+		<a href="/projects" {% if getCurrentUrl()|startsWith('/projects') %}class="active" {% endif %}>Projects</a>
+		<a href="/aboutme" {% if getCurrentUrl()|startsWith('/aboutme') %}class="active" {% endif %}>About Me</a>
+		<a href="/resume" {% if getCurrentUrl()|startsWith('/resume') %}class="active" {% endif %}>Résumé</a>
+	    <a href="/cms/">CMS</a>
+	</nav>
+	<nav id="main-nav-fixed" class="pills center fixed" style="display:none;">
+		<a href="/articles" {% if getCurrentUrl()|startsWith('/articles') || getCurrentUrl() == '/' %}class="active" {% endif %}>Blog</a>
+		<a href="/aboutme" {% if getCurrentUrl()|startsWith('/aboutme') %}class="active" {% endif %}>About Me</a>
+		<a href="/resume" {% if getCurrentUrl()|startsWith('/resume') %}class="active" {% endif %}>Résumé</a>
+	    <a href="/cms/">CMS</a>
+	</nav>
+</header>

@@ -1,3 +1,24 @@
+#stripe1, #stripe2, #stripe3 {
+    position: fixed;
+    left: 5%;
+    right: 90%;
+    background: $background-orange;
+    top: 0; bottom: 0;
+    z-index: 1;
+}
+
+#stripe2 {
+    left: 10%;
+    right: 85%;
+    background: $background-green;
+}
+
+#stripe3 {
+    left: 15%;
+    right: 80%;
+    background: $background-blue;
+}
+
 .panel {
     @include border-radius();
     border: 1px solid #222;

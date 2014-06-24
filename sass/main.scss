@@ -8,37 +8,15 @@
 @import 'partials/misc';
 @import 'partials/modals';
 @import 'partials/footer';
-
-#stripe1, #stripe2, #stripe3 {
-    position: fixed;
-    left: 5%;
-    right: 90%;
-    background: $background-orange;
-    top: 0; bottom: 0;
-    z-index: 1;
-}
-
-#stripe2 {
-    left: 10%;
-    right: 85%;
-    background: $background-green;
-}
-
-#stripe3 {
-    left: 15%;
-    right: 80%;
-    background: $background-blue;
-}
-
-$width-sidebar:0px;
+@import 'partials/logo';
 
 .hidden {
     display: none;
 }
 
-body {
+html, body {
     width: 100%;
-    //overflow: hidden;
+    height: 100%;
 }
 
 a {
@@ -46,243 +24,28 @@ a {
     text-decoration: none;
 }
 
-#logo {
-    font-size: $font-size-h1;
-    margin: 0;
-    padding: $padding 0;
-    -webkit-text-stroke: 2px;
-    line-height: 80px;
-    font-family: $font-family-serif;
-    font-weight: 100;
-    font-size: floor(($font-size-base * 5));
-    text-align: center;
-    @include transition($time: 100ms);
-    white-space: nowrap;
-    
-    a {
-        color: $text-default;
-        text-decoration: none;
-        
-        &:hover {
-        }
-    }
-    
-    span {
-        display: inline-block;
-        font-family: $font-family-sans;
-        font-size: floor(($font-size-base * 4));
-        color: #fff;
-        background: $background-orange;
-        text-align: center;
-        @include border-radius(999px);
-        width: 80px;
-        line-height: 82px;
-        text-transform: uppercase;
-        vertical-align: top;
-        margin-left: 5px;
-        -webkit-text-stroke: 0.5px;
-    }
-    
-    &.fixed {
-        position: fixed;
-        z-index: 999;
-        top: -15px;
-        left: 15px;
-        line-height: calc(80px / 3);
-        font-size: floor(($font-size-base * 5)) / 3;
-        -webkit-text-stroke: 1px;
-        opacity: 0;
-        @include transition();
-        -moz-transform: translateY(-100px);
-        -webkit-transform: translateY(-100px);
-        -o-transform: translateY(-100px);
-        -ms-transform: translateY(-100px);
-        transform: translateY(-100px);
-        
-        &.shown {
-            opacity: 1;
-            -moz-transform: translateY(0px);
-            -webkit-transform: translateY(0px);
-            -o-transform: translateY(0px);
-            -ms-transform: translateY(0px);
-            transform: translateY(0px);
-        }
-        
-        span {
-            font-size: floor(($font-size-base * 4)) / 3;
-            width: calc(80px / 3);
-            line-height: calc(82px / 3);
-        }
-        
-//        $logo-scale: 0.33;
-//        -moz-transform: scale($logo-scale);
-//        -webkit-transform: scale($logo-scale);
-//        -o-transform: scale($logo-scale);
-//        -ms-transform: scale($logo-scale);
-//        transform: scale($logo-scale);
-        
-    }
-}
-
-#description {
-    font-family: $font-family-sans;
-    font-weight: 100;
-    font-size: $font-size-large;
-    text-align: center;
-    margin-bottom: $padding;
-    -webkit-text-stroke: 0.6px;
-    opacity: 0.75;
-}
-
-
-
-.popUp {
-    width: $width-sidebar - (2 * $padding);
-    background: $background-green;
-    color: #fff;
-    position: fixed;
-    right: 100%; bottom: 0;
-    padding: $padding;
-    font-family: $font-family-sans;
-    @include transition($time: 300ms);
-    
-    &.active {
-        -moz-transform: translateX($width-sidebar);
-        -webkit-transform: translateX($width-sidebar);
-        -o-transform: translateX($width-sidebar);
-        -ms-transform: translateX($width-sidebar);
-        transform: translateX($width-sidebar);
-    }
-}
-
-aside {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    background: $text-default;
-    width: $width-sidebar - (2 * $padding);
-    padding: $padding;
-    
-    h1 {
-        text-align: center;
-    }
-    
-    footer {
-        position: absolute;
-        bottom: 0; left: 0; right: 0;
-        text-align: center;
-        line-height: 36px;
-        color: #fff;
-        font-family: $font-family-sans;
-        font-size: $font-size-small;
-        -webkit-text-stroke: 0;
-        opacity: 0.5;
-        
-        a {
-            color: #fff;
-            text-decoration: none;
-            
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
-}
 main {
-    margin-left: $width-sidebar;
-    padding: $padding;
-    @include transition($time: 300ms);
-    overflow-y: auto;
-    height: calc(100% - 40px);
     position: relative;
-    z-index: 2;
-}
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 0 $padding;
 
-#loading {
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
-    text-align: center;
-    color: $darkGray;
-    font-size: 60px;
-    font-weight: bold;
-    -webkit-animation: loading 1s linear infinite;
-    
-    &:after {
-        content: '';
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-    }
-}
-
-@-webkit-keyframes loading {
-    0% { 
-        -moz-transform: rotate(0deg);
-        -webkit-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    
-    100% {
-        -moz-transform: rotate(360deg);
-        -webkit-transform: rotate(360deg);
-        -o-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
+    header {
+        position: relative;
+        z-index: 2;
     }
 
-}
-
-#editor {
-    position: absolute;
-    z-index: 999;
-    background: #f3f3f3;
-    top: 0px; bottom: 0; right: calc(-100% + 250px); left: 100%;
-    padding: $padding;
-    opacity: 0;
-    @include transition(300ms);
-    
-    &.active {
-        right: 0; left: $width-sidebar;
-        opacity: 1;
+    #content {
+        position: relative;
+        padding-bottom: 40px;
+        z-index: 2;
     }
-    
+
     footer {
         position: absolute;
-        display: block;
+        height: 40px;
         bottom: 0;
-        left: 0;
-        right: 0;
-        background: #555;
-        text-align: right;
-        vertical-align: middle;
-        padding: 4px;
-    }
-}
-
-.iiMdPreview {
-    position: relative;
-    width: 100%;
-    height: calc(100% - 60px);
-    
-    textarea, .MdPreview-html {
-        position: absolute;
-        width: calc(50% - 20px);
-        padding: 20px;
-        display: block;
-        height: calc(100% - 150px);
-    }
-
-    textarea {
-        font-family: monospace;
-        left: 0;
-    }
-    
-    .MdPreview-html {
-        left: 50%;
-        padding: 0 20px;
-        overflow: auto;
+        left: 0; right: 0;
+        z-index: 0;
     }
 }

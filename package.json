@@ -40,7 +40,8 @@
     "connect-header": "0.0.5",
     "uslug": "~1.0.3",
     "grunt-connect-proxy": "~0.1.10",
-    "colors": "~0.6.2"
+    "colors": "~0.6.2",
+    "MD5": "~1.2.1"
   },
   "devDependencies": {
     "grunt-contrib-sass": "~0.7.3",
