@@ -441,45 +441,6 @@ p {
   -webkit-text-stroke: 0.6px;
   opacity: 0.9; }
 
-main section {
-  max-width: 800px;
-  margin: 0 auto; }
-main article {
-  margin: auto auto 20px auto;
-  border-bottom: 3px solid rgba(85, 85, 85, 0.25);
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  border-radius: 2px;
-  -webkit-transition: all 150ms ease-in-out;
-  -moz-transition: all 150ms ease-in-out;
-  -ms-transition: all 150ms ease-in-out;
-  -o-transition: all 150ms ease-in-out;
-  transition: all 150ms ease-in-out;
-  width: calc(100% - ($padding*2));
-  overflow: hidden;
-  background: #fff;
-  padding: 20px;
-  padding-top: 10px; }
-  main article p {
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 1.6;
-    opacity: 0.8; }
-  main article .deck {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 300;
-    font-size: 18px;
-    padding: 10px 0;
-    opacity: 0.75; }
-  main article .byLine {
-    font-family: "Titillium Web", sans-serif;
-    font-weight: 400;
-    opacity: 0.75;
-    padding-top: 5px; }
-main a article:hover {
-  background: #f8f8f8; }
-
 .button {
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -883,9 +844,28 @@ main {
     position: relative;
     z-index: 2; }
   main #content {
+    max-width: 800px;
+    margin: 0 auto;
     position: relative;
     padding-bottom: 40px;
     z-index: 2; }
+    main #content article {
+      margin: auto auto 20px auto;
+      border-bottom: 3px solid rgba(85, 85, 85, 0.25);
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      -ms-border-radius: 2px;
+      border-radius: 2px;
+      -webkit-transition: all 300ms ease-in-out;
+      -moz-transition: all 300ms ease-in-out;
+      -ms-transition: all 300ms ease-in-out;
+      -o-transition: all 300ms ease-in-out;
+      transition: all 300ms ease-in-out;
+      width: calc(100% - ($padding*2));
+      overflow: hidden;
+      background: #fff;
+      padding: 20px;
+      padding-top: 10px; }
   main footer {
     position: absolute;
     height: 40px;
@@ -893,3 +873,57 @@ main {
     left: 0;
     right: 0;
     z-index: 0; }
+
+#articles article p {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.8; }
+#articles article .deck {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  padding: 10px 0;
+  opacity: 0.75; }
+#articles article .byLine {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  opacity: 0.75;
+  padding-top: 5px; }
+#articles a article:hover {
+  -moz-transform: scale(1.025);
+  -webkit-transform: scale(1.025);
+  -o-transform: scale(1.025);
+  -ms-transform: scale(1.025);
+  transform: scale(1.025); }
+
+#resume article div {
+  position: relative;
+  padding-bottom: 10px; }
+  #resume article div p {
+    margin-top: 0; }
+  #resume article div time {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    opacity: 0.5; }
+#resume article ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+#projects {
+  vertical-align: top; }
+  #projects article {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    margin: 0 2% 20px !important;
+    vertical-align: top; }
+    #projects article h4 {
+      line-height: 30px; }
+    #projects article time {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      opacity: 0.5; }

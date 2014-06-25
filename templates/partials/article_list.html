@@ -6,6 +6,7 @@
 
   {# Scaffolding only outputs the object.name, but feel to use any of the fields from your CMS form here. #}
   
+  <section id="articles">
   {% for id, article in data %}
   <a href="{{ url(article) }}">
     <article>
@@ -17,6 +18,7 @@
     </article>
   </a>
   {% endfor %}
+  </section>
 
   {# The actual pagination template, feel free to edit or replace the default one. #}
   {% include "templates/partials/paginator.html" %}

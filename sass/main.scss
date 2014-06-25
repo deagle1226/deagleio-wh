@@ -36,9 +36,24 @@ main {
     }
 
     #content {
+        max-width: 800px;
+        margin: 0 auto;
         position: relative;
         padding-bottom: 40px;
         z-index: 2;
+
+        article {
+            margin: auto auto $padding auto;
+            border-bottom: 3px solid rgba(#555, 0.25);
+            //border-bottom-width: 3px;
+            @include border-radius();
+            @include transition($time: 300ms);
+            width: calc(100% - ($padding*2));
+            overflow: hidden;
+            background: #fff;
+            padding: $padding;
+            padding-top: $padding/2;
+        }
     }
 
     footer {
@@ -47,5 +62,96 @@ main {
         bottom: 0;
         left: 0; right: 0;
         z-index: 0;
+    }
+}
+
+#articles {
+    article {
+        p {
+            font-weight: 300;
+            font-size: $font-size-large;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .deck {
+            font-family: $font-family-sans;
+            font-weight: 300;
+            font-size: $font-size-large;
+            padding: $padding/2 0;
+            opacity: 0.75;
+        }
+        
+        .byLine {
+            font-family: $font-family-sans;
+            font-weight: 400;
+            opacity: 0.75;
+            padding-top: 5px;
+        }
+    }
+
+    a {
+        article {
+            &:hover {
+                -moz-transform: scale(1.025);
+                -webkit-transform: scale(1.025);
+                -o-transform: scale(1.025);
+                -ms-transform: scale(1.025);
+                transform: scale(1.025);
+            }
+        }
+    }
+}
+
+#resume {
+    article {
+        div {
+            position: relative;
+            padding-bottom: 10px;
+
+            p {
+                margin-top: 0;
+            }
+
+            time {
+                position: absolute;
+                top: 5px;
+                right: 0;
+                opacity: 0.5;
+            }
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    }
+}
+
+#projects {
+    vertical-align: top;
+
+    article {
+        position: relative;
+        display: inline-block;
+        width: 40%;
+        margin: 0 2% $padding !important;
+        vertical-align: top;
+
+        h4 {
+            line-height: 30px;
+        }
+
+        p {
+            
+        }
+
+        time {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            opacity: 0.5;
+        }
     }
 }

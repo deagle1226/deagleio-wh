@@ -4,37 +4,38 @@
 
 {% extends "templates/partials/base.html" %}
 {% block content %}
+<section id="resume">
+	<article>
+	   	<h3>Work Experiences</h3>
 
-<article>
-   	Work Experiences
+		{% for experience in experiences %}
+	  	<div>
+	  		<h5>{{ experience.name|title }}</h5>
+	  		<h5 class="sub">{{ experience.employer|upper }} ({{ experience.address.city }}, {{ experience.address.state }})</h5>
+	  		{{ experience.description|markdown }}
+	  		<time>{{ experience.from|date('F Y') }} - {{ experience.to|date('F Y') }}</time>
+		</div>
+	    {% endfor %}
 
-	{% for experience in experiences %}
-  	<div>
-  		<b>{{ experience.name|upper }} - {{ experience.employer|upper }}</b>
-  		{{ experience.description|markdown }}
-  		{{ experience.from|date('F Y') }} - {{ experience.to|date('F Y') }}
-  		({{ experience.address.city }}, {{ experience.address.state }})
-	</div>
-    {% endfor %}
+	</article>
 
-</article>
+	<article>
+		<h3>Skills</h3>
 
-<article>
-	Skills
+		{{ skills.list|markdown }}
+	</article>
 
-	{{ skills.list|markdown }}
-</article>
+	<article>
+		<h3>Education</h3>
 
-<article>
-	Education
-
-	{% for thing in education %}
-	<div>
-		<b>{{ thing.name }} - {{ thing.address.city }}, {{ thing.address.state }}</b>
-		{{ thing.description|markdown }}
-		{{ thing.from|date('Y') }} - {{ thing.to|date('Y') }}
-	</div>
-	{% endfor %}
-</article>
+		{% for thing in education %}
+		<div>
+			<h5>{{ thing.name }} ({{ thing.address.city }}, {{ thing.address.state }})</h5>
+			{{ thing.description|markdown }}
+			<time>{{ thing.from|date('Y') }} - {{ thing.to|date('Y') }}</time>
+		</div>
+		{% endfor %}
+	</article>
+</section>
 
 {% endblock %}

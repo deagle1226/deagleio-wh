@@ -17,25 +17,18 @@
 {% block content %}
 
   {# The first thing we do is call projects data from the CMS. #}
-  {% set data = get('projects') %}
+  {% set projects = get('projects') %}
 
-  {# Next we sort the data by publish_date. The true bit reverses it so it's newest first. Learn more: #}
-  {# http://www.webhook.com/docs/template-rules-and-filters/#sortproperty_reverseorder #}
-  {% set data = data|sort('publish_date', true) %}
-
-  {# This is how you set pagination. It's always important to do this after your sort. #}
-  {% set data = paginate(data, 5) %}
-
-  <h1>List of projects</h1>
-
-  {# This forloop can use any data from http:localhost:2000/cms/#/form/projects/ #}
-  <ul>
-    {% for object in data %}
-      <li><a href="{{ url(object) }}">{{ object.name }}</a></li>
-    {% endfor %}
-  </ul>
-
-  {# The actual pagination template, feel free to edit or replace the default one. #}
-  {% include "templates/partials/paginator.html" %}
+<section id="projects">
+{% for project in projects %}
+  <article>
+    <h4>{{ project.name }}</h4>
+    <h4 class="sub">{{ project.type|upper }}</h4>
+    {{ project.description|markdown }}
+    <time>{{ project.from|date('F Y') }}{% if project.to %} - {{ project.to|date('F Y') }}{% endif %}</time>
+    {% if project.link %}<a href="{{ project.link }}">Project Site</a>{% endif %}
+  </article>
+{% endfor %}
+</section>
 
 {% endblock %}
