@@ -1,4 +1,3 @@
-'use strict';
 module.exports = function(grunt) {
 
     // ----------------------------------------------------------
@@ -65,6 +64,18 @@ module.exports = function(grunt) {
                 files: ['scripts/app/**/*.js'],
                 tasks: ['newer:jshint', 'browserifying:dev', 'build']
             }
+        },
+
+        shell: {
+            update: {
+                command: [
+                    'git pull',
+                    'npm install -g wh',
+                    'wh update',
+                    'npm install',
+                    'bower install'
+                ].join('&&')
+            }
         }
     });
 
@@ -72,6 +83,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-browserifying');
+    grunt.loadNpmTasks('grunt-shell');
+
+    grunt.registerTask('update', ['shell:update']);
 
     // NEVER REMOVE THESE LINES, OR ELSE YOUR PROJECT MAY NOT WORK
     require('./options/generatorOptions.js')(grunt);
