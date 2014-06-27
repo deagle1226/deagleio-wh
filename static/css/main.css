@@ -844,6 +844,10 @@ paper-progress {
   top: 0;
   width: 100%;
   z-index: 99; }
+  paper-progress::shadow #activeProgress {
+    background-color: #d9534f; }
+  paper-progress::shadow #progressContainer {
+    background-color: transparent; }
 
 main {
   position: relative;

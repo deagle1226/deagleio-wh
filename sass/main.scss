@@ -29,6 +29,14 @@ paper-progress {
     top: 0;
     width: 100%;
     z-index: 99;
+
+    &::shadow #activeProgress {
+      background-color: $background-red;
+    }
+
+    &::shadow #progressContainer {
+      background-color: transparent;
+    }
 }
 
 main {

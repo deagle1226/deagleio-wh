@@ -1,5 +1,4 @@
-var transit = require('jquery.transit'),
-    velocity = require('velocity-animate');
+var velocity = require('velocity-animate');
 
 module.exports = (function() {
 
@@ -31,6 +30,13 @@ module.exports = (function() {
             nav.find('a.active').removeClass('active');
             nav.find('a[href="/articles/"]').addClass('active');
             to('/');
+        });
+
+        $('#content').on('click', '#articles > a', function(event) {
+            event.preventDefault();
+
+            var url = $(this).attr('href');
+            to(url);
         });
     };
 
