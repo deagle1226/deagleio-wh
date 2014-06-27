@@ -27,9 +27,12 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
 
+    <script src="/static/bower_components/platform/platform.js"></script>
+    <link rel="import" href="/static/bower_components/paper-progress/paper-progress.html">
     {% block head_extra %}{% endblock %}
   </head>
   <body>
+    <paper-progress value="0"></paper-progress>
     {% block body %}
       <!--[if lt IE 7]>
         <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -44,7 +47,9 @@
       {% include "templates/partials/header.html" %}
 
         <section id="content">
+          <section id="transporter">
           {% block content %}{% endblock %}
+          </section>
         </section>
 
       {% include "templates/partials/footer.html" %}

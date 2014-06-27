@@ -3,6 +3,6 @@ var client = require('./client.js');
 var nav = require('./navigation.js');
 
 $(document).on('ready', function() {
-    client.init();
-    //nav.enter();
+    //client.init();
+    nav.init();
 });

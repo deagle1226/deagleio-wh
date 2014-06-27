@@ -756,6 +756,10 @@ footer {
   font-family: "Titillium Web", sans-serif;
   font-weight: 300;
   -webkit-text-stroke: 0; }
+  footer a {
+    color: rgba(255, 255, 255, 0.75); }
+    footer a:hover {
+      color: rgba(255, 255, 255, 0.85); }
 
 #logo {
   font-size: 36px;
@@ -834,6 +838,12 @@ html, body {
 a {
   color: #555;
   text-decoration: none; }
+
+paper-progress {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 99; }
 
 main {
   position: relative;
