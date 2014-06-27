@@ -10,40 +10,13 @@ module.exports = (function() {
         nav = $('#main-nav');
 
     parcel.init = function() {
-        this.to = to;
-        this.enter = enter;
+        this.goTo = goTo;
 
         enter();
         bindEvents();
     };
 
-    function bindEvents() {
-        nav.on('click', 'a', function(event) {
-            event.preventDefault();
-
-            $(this).siblings('.active').removeClass('active');
-            $(this).addClass('active');
-
-            var url = $(this).attr('href');
-            to(url);
-        });
-
-        $('#logo').on('click', 'a', function(event) {
-            event.preventDefault();
-            nav.find('a.active').removeClass('active');
-            nav.find('a[href="/articles/"]').addClass('active');
-            to('/');
-        });
-
-        $('#content').on('click', '#articles > a', function(event) {
-            event.preventDefault();
-
-            var url = $(this).attr('href');
-            to(url);
-        });
-    }
-
-    function to(url) {
+    function goTo(url) {
         var html;
         $.get(url, function(data) {
             html = $(data).find(transporter);
@@ -72,6 +45,32 @@ module.exports = (function() {
                 nav.find('a[href="' + window.location.pathname + '"]').addClass('active');
             }
 
+        });
+    }
+
+    function bindEvents() {
+        nav.on('click', 'a', function(event) {
+            event.preventDefault();
+
+            $(this).siblings('.active').removeClass('active');
+            $(this).addClass('active');
+
+            var url = $(this).attr('href');
+            goTo(url);
+        });
+
+        $('#logo').on('click', 'a', function(event) {
+            event.preventDefault();
+            nav.find('a.active').removeClass('active');
+            nav.find('a[href="/articles/"]').addClass('active');
+            goTo('/');
+        });
+
+        $('#content').on('click', '#articles > a', function(event) {
+            event.preventDefault();
+
+            var url = $(this).attr('href');
+            goTo(url);
         });
     }
 
