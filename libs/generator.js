@@ -455,17 +455,50 @@ module.exports.generator = function (config, logger, fileParser) {
           // We ignore partials, special directory to allow making of partial includes
           if(path.extname(file) === '.html' && file.indexOf('templates/partials') !== 0)
           {
+            if(path.dirname(file).split('/').length <= 1) {
+              return true;
+            }
             // Here we try and abstract out the content type name from directory structure
             var baseName = path.basename(file, '.html');
-            var newPath = path.dirname(file).replace('templates', './.build');
+            var newPath = path.dirname(file).replace('templates', './.build').split('/').slice(0,3).join('/');
             var pathParts = path.dirname(file).split('/');
-            var objectName = pathParts[pathParts.length - 1];
+            var objectName = pathParts[1];
             var items = data[objectName];
             var info = typeInfo[objectName];
+            var filePath = path.dirname(file);
+            var overrideFile = null;
 
             if(!items) {
               logger.error('Missing data for content type ' + objectName);
             }
+
+            items = _.map(items, function(value, key) { value._id = key; value._type = objectName; return value });
+
+            var publishedItems = _.filter(items, function(item) {
+              if(!item.publish_date) {
+                return false;
+              }
+
+              var now = Date.now();
+              var pdate = Date.parse(item.publish_date);
+
+              if(pdate > now + (1 * 60 * 1000)) {
+                return false;
+              }
+
+              return true;
+            });
+
+            var baseNewPath = '';
+
+            // Find if this thing has a template control
+            var templateWidgetName = null;
+
+            typeInfo[objectName].controls.forEach(function(control) {
+              if(control.controlType === 'template') {
+                templateWidgetName = control.name;
+              }
+            });
 
             // TODO, DETECT IF FILE ALREADY EXISTS, IF IT DOES APPEND A NUMBER TO IT DUMMY
             if(baseName === 'list')
@@ -477,31 +510,24 @@ module.exports.generator = function (config, logger, fileParser) {
             } else if (baseName === 'individual') {
               // Output should be path + id + '/index.html'
               // Should pass in object as 'item'
-              var baseNewPath = newPath;
-
-              items = _.map(items, function(value, key) { value._id = key; value._type = objectName; return value });
-              var publishedItems = _.filter(items, function(item) {
-                if(!item.publish_date) {
-                  return false;
-                }
-
-                var now = Date.now();
-                var pdate = Date.parse(item.publish_date);
-
-                if(pdate > now + (1 * 60 * 1000)) {
-                  return false;
-                }
-
-                return true;
-              });
+              baseNewPath = newPath;
 
               // TODO: Check to make sure file does not exist yet, and then adjust slug if it does? (how to handle in swig functions)
               for(var key in publishedItems)
               {
                 var val = publishedItems[key];
 
+                if(templateWidgetName) {
+                  overrideFile = 'templates/' + objectName + '/templates/' + val[templateWidgetName];
+                }
+
                 newPath = baseNewPath + '/' + slug(val.name).toLowerCase() + '/index.html';
-                writeTemplate(file, newPath, { item: val });
+
+                if(fs.existsSync(overrideFile)) {
+                  writeTemplate(overrideFile, newPath, { item: val });
+                } else {
+                  writeTemplate(file, newPath, { item: val });
+                }
               }
 
               var previewPath = baseNewPath.replace('./.build', './.build/_wh_previews');
@@ -509,7 +535,29 @@ module.exports.generator = function (config, logger, fileParser) {
               {
                 var val = items[key];
 
+                if(templateWidgetName) {
+                  overrideFile = 'templates/' + objectName + '/templates/' + val[templateWidgetName];
+                }
+
                 newPath = previewPath + '/' + val.preview_url + '/index.html';
+
+                if(fs.existsSync(overrideFile)) {
+                  writeTemplate(overrideFile, newPath, { item: val });
+                } else {
+                  writeTemplate(file, newPath, { item: val });
+                }
+              }
+            } else if(filePath.indexOf('templates/' + objectName + '/templates') !== 0) { // Handle sub pages in here
+              baseNewPath = newPath;
+
+              var middlePathName = filePath.replace('templates/' + objectName, '') + '/' + baseName;
+              middlePathName = middlePathName.substring(1);
+
+              for(var key in publishedItems)
+              {
+                var val = publishedItems[key];
+
+                newPath = baseNewPath + '/' + slug(val.name).toLowerCase() + '/' + middlePathName + '/index.html';
                 writeTemplate(file, newPath, { item: val });
               }
             }
@@ -572,24 +620,36 @@ module.exports.generator = function (config, logger, fileParser) {
   };
 
   this.checkScaffoldingMD5 = function(name, callback) {
-    var directory = 'templates/' + name + '/';
-    var individual = directory + 'individual.html';
-    var list = directory + 'list.html';
+    self.cachedData = null;
+    getData(function(data, typeInfo) {
+      var directory = 'templates/' + name + '/';
+      var individual = directory + 'individual.html';
+      var list = directory + 'list.html';
+      var oneOff = 'pages/' + name + '.html';
 
-    var individualMD5 = null;
-    var listMD5 = null;
+      var individualMD5 = null;
+      var listMD5 = null;
+      var oneOffMD5 = null;
 
-    if(fs.existsSync(individual)) {
-      var indContent = fs.readFileSync(individual);
-      individualMD5 = md5(indContent);
-    }
+      if(typeInfo[name].oneOff) {
+        if(fs.existsSync(oneOff)) {
+          var oneOffContent = fs.readFileSync(oneOff);
+          oneOffMD5 = md5(oneOffContent);
+        }
+      } else {
+        if(fs.existsSync(individual)) {
+          var indContent = fs.readFileSync(individual);
+          individualMD5 = md5(indContent);
+        }
 
-    if(fs.existsSync(individual)) {
-      var listContent = fs.readFileSync(list);
-      listMD5 = md5(listContent);
-    }
+        if(fs.existsSync(list)) {
+          var listContent = fs.readFileSync(list);
+          listMD5 = md5(listContent);
+        }
+      }
 
-    callback(individualMD5, listMD5);
+      callback(individualMD5, listMD5, oneOffMD5);
+    });
   }
 
   /**
@@ -602,18 +662,13 @@ module.exports.generator = function (config, logger, fileParser) {
     logger.ok('Creating Scaffolding\n');
     var directory = 'templates/' + name + '/';
 
-    if(!force && fs.existsSync(directory)) {
-      if(done) done(null, null);
-      return false;
-    }
-
-    mkdirp.sync(directory);
-
     var list = directory + 'list.html';
     var individual = directory +  'individual.html';
+    var oneOff = 'pages/' + name + '.html';
 
     var individualTemplate = fs.readFileSync('./libs/scaffolding_individual.html');
     var listTemplate = fs.readFileSync('./libs/scaffolding_list.html');
+    var oneOffTemplate = fs.readFileSync('./libs/scaffolding_oneoff.html');
 
     var widgetFilesRaw = [];
 
@@ -656,18 +711,45 @@ module.exports.generator = function (config, logger, fileParser) {
         controlsObj[item.name] = item;
       });
 
-      var template = _.template(individualTemplate, { widgetFiles: widgetFiles, typeName: name, typeInfo: typeInfo[name] || {}, controls: controlsObj }, { 'imports': { 'renderWidget' : renderWidget}});
-      template = template.replace(/^\s*\n/gm, '');
+      var individualMD5 = null;
+      var listMD5 = null;
+      var oneOffMD5 = null;
 
-      var individualMD5 = md5(template);
-      fs.writeFileSync(individual, template);
-      
-      var lTemplate = _.template(listTemplate, { typeName: name });
+      if(typeInfo[name].oneOff) {
+        if(!force && fs.existsSync(oneOff)) {
+          if(done) done(null, null, null);
+          logger.error('Scaffolding for ' + name + ' already exists, use --force to overwrite');
+          return false;
+        }
 
-      var listMD5 = md5(lTemplate);
-      fs.writeFileSync(list, lTemplate);
+        var oneOffFile = _.template(oneOffTemplate, { widgetFiles: widgetFiles, typeName: name, typeInfo: typeInfo[name] || {}, controls: controlsObj }, { 'imports': { 'renderWidget' : renderWidget}});
+        oneOffFile = oneOffFile.replace(/^\s*\n/gm, '');
 
-      if(done) done(individualMD5, listMD5);
+        oneOffMD5 = md5(oneOffFile);
+        fs.writeFileSync(oneOff, oneOffFile);
+      } else {
+
+        if(!force && fs.existsSync(directory)) {
+          if(done) done(null, null, null);
+          logger.error('Scaffolding for ' + name + ' already exists, use --force to overwrite');
+          return false;
+        }
+
+        mkdirp.sync(directory);
+
+        var template = _.template(individualTemplate, { widgetFiles: widgetFiles, typeName: name, typeInfo: typeInfo[name] || {}, controls: controlsObj }, { 'imports': { 'renderWidget' : renderWidget}});
+        template = template.replace(/^\s*\n/gm, '');
+
+        individualMD5 = md5(template);
+        fs.writeFileSync(individual, template);
+        
+        var lTemplate = _.template(listTemplate, { typeName: name });
+
+        listMD5 = md5(lTemplate);
+        fs.writeFileSync(list, lTemplate);
+      }
+
+      if(done) done(individualMD5, listMD5, oneOffMD5);
     });
 
     return true;
@@ -701,6 +783,30 @@ module.exports.generator = function (config, logger, fileParser) {
     }
   };
 
+  /*
+    Runs 'wh push', used by web listener to give push button on CMS
+  */
+  var pushSite = function(callback) {
+    var command = spawn('wh', ['push'], {
+      stdio: 'inherit',
+      cwd: '.'
+    });
+
+    command.on('error', function() {
+      callback(true);
+    });
+    
+    command.on('close', function(exit, signal) {
+
+      if(exit === 0) {
+        callback(null);
+      } else {
+        callback(exit);
+      }
+
+    });
+  }
+
   /**
    * Starts a websocket listener on 0.0.0.0 (for people who want to run wh serv over a network)
    * Accepts messages for generating scaffolding and downloading preset themes.
@@ -722,23 +828,39 @@ module.exports.generator = function (config, logger, fileParser) {
         if(message.indexOf('scaffolding:') === 0)
         {
           var name = message.replace('scaffolding:', '');
-          self.makeScaffolding(name, function(individualMD5, listMD5) {
-            sock.send('done:' + JSON.stringify({ individualMD5: individualMD5, listMD5: listMD5 }));
+            console.log(name);
+          self.makeScaffolding(name, function(individualMD5, listMD5, oneOffMD5) {
+            console.log(name);
+            console.log(oneOffMD5);
+            sock.send('done:' + JSON.stringify({ individualMD5: individualMD5, listMD5: listMD5, oneOffMD5: oneOffMD5 }));
           });
         } else if (message.indexOf('scaffolding_force:') === 0) {
           var name = message.replace('scaffolding_force:', '');
-          self.makeScaffolding(name, function(individualMD5, listMD5) {
-            sock.send('done:' + JSON.stringify({ individualMD5: individualMD5, listMD5: listMD5 }));
+          self.makeScaffolding(name, function(individualMD5, listMD5, oneOffMD5) {
+            sock.send('done:' + JSON.stringify({ individualMD5: individualMD5, listMD5: listMD5, oneOffMD5: oneOffMD5 }));
           }, true);
         } else if (message.indexOf('check_scaffolding:') === 0) {
           var name = message.replace('check_scaffolding:', '');
-          self.checkScaffoldingMD5(name, function(individualMD5, listMD5) {
-            sock.send('done:' + JSON.stringify({ individualMD5: individualMD5, listMD5: listMD5 }));
+          self.checkScaffoldingMD5(name, function(individualMD5, listMD5, oneOffMD5) {
+            sock.send('done:' + JSON.stringify({ individualMD5: individualMD5, listMD5: listMD5, oneOffMD5: oneOffMD5 }));
           });
         } else if (message === 'reset_files') {
           resetGenerator(function(error) {
             if(error) {
               sock.send('done:' + JSON.stringify({ err: 'Error while resetting files' }));
+            } else {
+              sock.send('done');
+            }
+          });
+        } else if (message === 'supported_messages') {
+          sock.send('done:' + JSON.stringify([
+            'scaffolding', 'scaffolding_force', 'check_scaffolding', 'reset_files', 'supported_messages',
+            'push', 'build', 'preset'
+          ]));
+        } else if (message === 'push') {
+          pushSite(function(error) {
+            if(error) {
+              sock.send('done:' + JSON.stringify({ err: 'Error while pushing site.' }));
             } else {
               sock.send('done');
             }
@@ -788,6 +910,8 @@ module.exports.generator = function (config, logger, fileParser) {
       var cmsFile = fs.readFileSync('./libs/cms.html');
 
       var cmsTemplated = _.template(cmsFile, { siteName: sitename });
+
+      mkdirp.sync('./pages/');
 
       fs.writeFileSync('./pages/cms.html', cmsTemplated);
     }

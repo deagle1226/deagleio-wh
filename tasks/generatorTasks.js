@@ -1,5 +1,5 @@
 
-var curVersion = 'v31';
+var curVersion = 'v32';
 
 var request = require('request');
 
@@ -52,10 +52,6 @@ module.exports = function(grunt) {
 
 
     var result = generator.makeScaffolding(name, done, force);
-
-    if(!result) {
-      grunt.log.error('Scaffolding for ' + name + ' already exists, use --force to overwrite');
-    }
   });
 
   grunt.registerTask('watch', 'Watch for changes in templates and regenerate site', function() {
