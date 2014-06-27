@@ -7,14 +7,17 @@ module.exports = (function() {
     var parcel = {},
         root = $('#content'),
         transporter = '#transporter',
-        nav = $('#main-nav'),
-        progress = $('paper-progress::shadow').find('#activeProgress');
+        nav = $('#main-nav');
 
     parcel.init = function() {
         this.to = to;
         this.enter = enter;
-        enter();
 
+        enter();
+        bindEvents();
+    };
+
+    function bindEvents() {
         nav.on('click', 'a', function(event) {
             event.preventDefault();
 
@@ -38,7 +41,7 @@ module.exports = (function() {
             var url = $(this).attr('href');
             to(url);
         });
-    };
+    }
 
     function to(url) {
         var html;
@@ -63,7 +66,7 @@ module.exports = (function() {
         root.load(window.location.pathname + ' ' + transporter, function() {
             // End Load
             nav.find('a.active').removeClass('active');
-            if (window.location.pathname === '/') {
+            if (window.location.pathname === '/' || window.location.pathname.indexOf('articles') != -1) {
                 nav.find('a[href="/articles/"]').addClass('active');
             } else {
                 nav.find('a[href="' + window.location.pathname + '"]').addClass('active');
