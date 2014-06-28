@@ -63,6 +63,10 @@ module.exports = function(grunt) {
             js: {
                 files: ['scripts/app/**/*.js'],
                 tasks: ['newer:jshint', 'browserifying:dev', 'build']
+            },
+            html: {
+                files: ['static/imports/**/*.html', 'Gruntfile.js'],
+                tasks: ['vulcanize', 'build']
             }
         },
 
@@ -76,6 +80,18 @@ module.exports = function(grunt) {
                     'bower install'
                 ].join('&&')
             }
+        },
+
+        vulcanize: {
+            default: {
+                options: {
+                    csp: true,
+                    strip: true
+                },
+                files: {
+                    'static/imports/index.html': 'static/imports/link_map.html'
+                }
+            }
         }
     });
 
@@ -84,6 +100,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-browserifying');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-vulcanize');
 
     grunt.registerTask('update', ['shell:update']);
 
