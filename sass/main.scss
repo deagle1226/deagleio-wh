@@ -24,19 +24,14 @@ a {
     text-decoration: none;
 }
 
-paper-progress {
+#progress-bar {
     position: absolute;
     top: 0;
-    width: 100%;
+    left: 0;
+    width: 0%;
     z-index: 99;
-
-    &::shadow #activeProgress {
-      background-color: $background-red;
-    }
-
-    &::shadow #progressContainer {
-      background-color: transparent;
-    }
+    height: 3px;
+    background-color: $background-red;
 }
 
 main {

@@ -21,13 +21,13 @@ module.exports = (function() {
         $.get(url, function(data) {
             html = $(data).find(transporter);
         });
-        $('paper-progress::shadow').find('#activeProgress').velocity({
+        $('#progress-bar').velocity({
             width: '100%'
         }, LOAD_TIME, function() {
             root.html(html);
             // End Load
             history.pushState({}, '', url);
-            $('paper-progress::shadow').find('#activeProgress').velocity({
+            $('#progress-bar').velocity({
                 width: '0%'
             }, 0);
         });
