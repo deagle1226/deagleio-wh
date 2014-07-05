@@ -2,5 +2,8 @@
 var nav = require('./navigation.js');
 
 $(document).on('ready', function() {
-    nav.init();
+    nav.init({
+        enter: true,
+        bindEvents: true
+    });
 });

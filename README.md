@@ -1,6 +1,6 @@
-## Webhook site builder
+deagle.io
+=========
 
-This repository is a collection of [Grunt](http://www.gruntjs.com) tasks, templates
-and static assets that build and serve a Webhook powered site.
+These are the templates, stylesheets, and scripts that power [deagle.io](http://deagle.io).
 
-[Documentation found here](http://webhook.com/docs/)
+*Built and served with [Webhook](http://webhook.com).*

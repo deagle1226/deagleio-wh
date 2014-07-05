@@ -1,15 +1,15 @@
 <header>
 	<div id="logo">
-		<a href="/">deagle<span>io</span></a>
+		<a href="/" class="ajax">deagle<span>io</span></a>
 	</div>
 
 	<div id="description">{{ getSetting('site_description') }}</div>
 
 	{% set types = getTypes() %}
 	<nav id="main-nav" class="pills center">
-		<a href="/articles/">Blog</a>
+		<a href="/articles/" class="ajax home">Blog</a>
 		<!-- <a href="/projects/">Projects</a> -->
-		<a href="/aboutme/">About Me</a>
+		<a href="/aboutme/" class="ajax">About Me</a>
 <!-- 		<a href="/resume/">Résumé</a>
  -->	</nav>
 </header>

@@ -8,7 +8,7 @@
   
   <section id="articles">
   {% for id, article in data %}
-  <a href="{{ url(article) }}">
+  <a href="{{ url(article) }}" class="ajax">
     <article>
       <h3>{{ article.name }}</h3>
       <div class="deck">

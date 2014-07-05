@@ -34,6 +34,14 @@ a {
     background-color: $background-red;
 }
 
+.chosen {
+    -moz-transform: scale(1.025);
+    -webkit-transform: scale(1.025);
+    -o-transform: scale(1.025);
+    -ms-transform: scale(1.025);
+    transform: scale(1.025);
+}
+
 main {
     position: relative;
     min-height: 100%;
@@ -51,6 +59,7 @@ main {
         position: relative;
         padding-bottom: 40px;
         z-index: 2;
+        @include transition($time: 300ms);
 
         article {
             margin: auto auto $padding auto;
@@ -71,7 +80,7 @@ main {
         height: 40px;
         bottom: 0;
         left: 0; right: 0;
-        z-index: 0;
+        z-index: 2;
     }
 }
 
@@ -100,17 +109,17 @@ main {
         }
     }
 
-    a {
-        article {
-            &:hover {
-                -moz-transform: scale(1.025);
-                -webkit-transform: scale(1.025);
-                -o-transform: scale(1.025);
-                -ms-transform: scale(1.025);
-                transform: scale(1.025);
-            }
-        }
-    }
+    // a {
+    //     article {
+    //         &:hover {
+    //             -moz-transform: scale(1.025);
+    //             -webkit-transform: scale(1.025);
+    //             -o-transform: scale(1.025);
+    //             -ms-transform: scale(1.025);
+    //             transform: scale(1.025);
+    //         }
+    //     }
+    // }
 }
 
 #resume {

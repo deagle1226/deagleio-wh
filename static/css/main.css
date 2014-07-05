@@ -685,8 +685,8 @@ nav {
       -o-transition: all 150ms ease-in-out;
       transition: all 150ms ease-in-out; }
 
-#stripe1, #stripe2, #stripe3 {
-  position: fixed;
+.stripe1, .stripe2, .stripe3 {
+  position: absolute;
   left: 5%;
   right: 90%;
   background: #d49337;
@@ -694,12 +694,12 @@ nav {
   bottom: 0;
   z-index: 1; }
 
-#stripe2 {
+.stripe2 {
   left: 10%;
   right: 85%;
   background: #5cb85c; }
 
-#stripe3 {
+.stripe3 {
   left: 15%;
   right: 80%;
   background: #428bca; }
@@ -712,6 +712,37 @@ nav {
   border: 1px solid #222;
   border-bottom-width: 3px;
   padding: 20px; }
+
+#loader div {
+  width: 7px;
+  height: 7px;
+  position: fixed;
+  background-color: #ccc;
+  top: 1px;
+  border-radius: 50%;
+  left: -7px; }
+#loader div:nth-child(1) {
+  background-color: #428bca; }
+  #loader div:nth-child(1).go {
+    -webkit-animation: move 1250ms infinite cubic-bezier(0.2, 0.64, 0.81, 0.23); }
+#loader div:nth-child(2) {
+  background-color: #5cb85c; }
+  #loader div:nth-child(2).go {
+    -webkit-animation: move 1250ms 150ms infinite cubic-bezier(0.2, 0.64, 0.81, 0.23); }
+#loader div:nth-child(3) {
+  background-color: #d49337; }
+  #loader div:nth-child(3).go {
+    -webkit-animation: move 1250ms 300ms infinite cubic-bezier(0.2, 0.64, 0.81, 0.23); }
+
+@-webkit-keyframes move {
+  0% {
+    left: -7px; }
+
+  70% {
+    left: calc(100% + 7px); }
+
+  100% {
+    left: calc(100% + 7px); } }
 
 .modal-box {
   position: fixed;
@@ -848,6 +879,13 @@ a {
   height: 3px;
   background-color: #d9534f; }
 
+.chosen {
+  -moz-transform: scale(1.025);
+  -webkit-transform: scale(1.025);
+  -o-transform: scale(1.025);
+  -ms-transform: scale(1.025);
+  transform: scale(1.025); }
+
 main {
   position: relative;
   min-height: 100%;
@@ -861,7 +899,12 @@ main {
     margin: 0 auto;
     position: relative;
     padding-bottom: 40px;
-    z-index: 2; }
+    z-index: 2;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out; }
     main #content article {
       margin: auto auto 20px auto;
       border-bottom: 3px solid rgba(85, 85, 85, 0.25);
@@ -885,7 +928,7 @@ main {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 0; }
+    z-index: 2; }
 
 #articles article p {
   font-weight: 300;
@@ -903,12 +946,6 @@ main {
   font-weight: 400;
   opacity: 0.75;
   padding-top: 5px; }
-#articles a article:hover {
-  -moz-transform: scale(1.025);
-  -webkit-transform: scale(1.025);
-  -o-transform: scale(1.025);
-  -ms-transform: scale(1.025);
-  transform: scale(1.025); }
 
 #resume article div {
   position: relative;
