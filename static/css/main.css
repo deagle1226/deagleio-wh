@@ -743,7 +743,6 @@ nav {
 
   100% {
     left: calc(100% + 7px); } }
-
 .modal-box {
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
@@ -879,7 +878,7 @@ a {
   height: 3px;
   background-color: #d9534f; }
 
-.chosen {
+.loading {
   -moz-transform: scale(1.025);
   -webkit-transform: scale(1.025);
   -o-transform: scale(1.025);

@@ -65,7 +65,7 @@ module.exports = function(grunt) {
                 tasks: ['newer:jshint', 'browserifying:dev', 'build']
             },
             html: {
-                files: ['static/imports/**/*.html', 'Gruntfile.js'],
+                files: ['static/imports/link_map.html'],
                 tasks: ['vulcanize', 'build']
             }
         },

@@ -13,9 +13,9 @@ module.exports = (function() {
     };
 
     function goTo(url) {
-        root.addClass('chosen').load(url + ' ' + transporter, function() {
+        root.addClass('loading').load(url + ' ' + transporter, function() {
             history.pushState({}, '', url);
-            root.removeClass('chosen');
+            root.removeClass('loading');
         });
     }
 
