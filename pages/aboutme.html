@@ -2,7 +2,8 @@
 {% extends "templates/partials/base.html" %}
 {% block content %}
 
-<article>
+<article id="aboutme">
+   	<img class="profile" src="{{ about.image|imageCrop(68) }}" />
    	{{ about.body|markdown }}
 </article>
 

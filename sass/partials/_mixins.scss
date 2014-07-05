@@ -17,3 +17,12 @@
     
     display: inline-block;
 }
+
+@mixin columns($count, $gap: 20px) {
+    -moz-column-count: $count;
+    -moz-column-gap: $gap;
+    -webkit-column-count: $count;
+    -webkit-column-gap: $gap;
+    column-count: $count;
+    column-gap: $gap;
+}

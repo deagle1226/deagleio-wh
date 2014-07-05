@@ -22,10 +22,10 @@
 <section id="projects">
 {% for project in projects %}
   <article>
+  	<time>{{ project.from|date('F Y') }}{% if project.to %} - {{ project.to|date('F Y') }}{% endif %}</time>
     <h4>{{ project.name }}</h4>
     <h4 class="sub">{{ project.type|upper }}</h4>
     {{ project.description|markdown }}
-    <time>{{ project.from|date('F Y') }}{% if project.to %} - {{ project.to|date('F Y') }}{% endif %}</time>
     {% if project.link %}<a href="{{ project.link }}">Project Site</a>{% endif %}
   </article>
 {% endfor %}

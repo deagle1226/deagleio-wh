@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: $headings-font-weight;
 
     &.sub {
-        opacity: 0.5;
+        color: rgba($text-default, 0.5);
         font-family: $font-family-sans;
         font-weight: 700;
     }

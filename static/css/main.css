@@ -384,7 +384,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
   font-weight: bold; }
   h1.sub, h2.sub, h3.sub, h4.sub, h5.sub, h6.sub {
-    opacity: 0.5;
+    color: rgba(85, 85, 85, 0.5);
     font-family: "Titillium Web", sans-serif;
     font-weight: 700; }
   h1.inline, h2.inline, h3.inline, h4.inline, h5.inline, h6.inline {
@@ -858,6 +858,21 @@ footer {
       width: calc(80px / 3);
       line-height: calc(82px / 3); }
 
+.pagination {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: block;
+  text-align: center; }
+  .pagination li {
+    display: inline-block; }
+    .pagination li a {
+      width: 24px;
+      height: 24px;
+      display: block; }
+      .pagination li a core-icon {
+        fill: #555; }
+
 .hidden {
   display: none; }
 
@@ -946,6 +961,12 @@ main {
   opacity: 0.75;
   padding-top: 5px; }
 
+#aboutme img.profile {
+  float: left;
+  border-radius: 50%;
+  box-shadow: 0px -1px 0px 1px rgba(85, 85, 85, 0.25);
+  margin: 5px 15px 0 0; }
+
 #resume article div {
   position: relative;
   padding-bottom: 10px; }
@@ -962,17 +983,27 @@ main {
   margin: 0; }
 
 #projects {
-  vertical-align: top; }
+  vertical-align: top;
+  -moz-column-count: 2;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 20px;
+  column-count: 2;
+  column-gap: 20px; }
+  @media only screen and (max-width: 720px) {
+    #projects {
+      -moz-column-count: 1;
+      -moz-column-gap: 0px;
+      -webkit-column-count: 1;
+      -webkit-column-gap: 0px;
+      column-count: 1;
+      column-gap: 0px; } }
   #projects article {
     position: relative;
     display: inline-block;
-    width: 40%;
-    margin: 0 2% 20px !important;
     vertical-align: top; }
     #projects article h4 {
       line-height: 30px; }
     #projects article time {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      opacity: 0.5; }
+      float: right;
+      color: rgba(85, 85, 85, 0.5); }

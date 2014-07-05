@@ -9,6 +9,7 @@
 @import 'partials/modals';
 @import 'partials/footer';
 @import 'partials/logo';
+@import 'partials/pagination';
 
 .hidden {
     display: none;
@@ -108,18 +109,15 @@ main {
             padding-top: 5px;
         }
     }
+}
 
-    // a {
-    //     article {
-    //         &:hover {
-    //             -moz-transform: scale(1.025);
-    //             -webkit-transform: scale(1.025);
-    //             -o-transform: scale(1.025);
-    //             -ms-transform: scale(1.025);
-    //             transform: scale(1.025);
-    //         }
-    //     }
-    // }
+#aboutme {
+    img.profile {
+        float: left;
+        border-radius: 50%;
+        box-shadow: 0px -1px 0px 1px rgba(#555, 0.25);
+        margin: 5px 15px 0 0;
+    }
 }
 
 #resume {
@@ -150,12 +148,15 @@ main {
 
 #projects {
     vertical-align: top;
+    @include columns(2);
+
+    @media only screen and (max-width : 720px) {
+        @include columns(1, 0px);
+    }
 
     article {
         position: relative;
         display: inline-block;
-        width: 40%;
-        margin: 0 2% $padding !important;
         vertical-align: top;
 
         h4 {
@@ -167,10 +168,8 @@ main {
         }
 
         time {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            opacity: 0.5;
+            float: right;
+            color: rgba($text-default, 0.5);
         }
     }
 }
