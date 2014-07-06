@@ -70,18 +70,6 @@ module.exports = function(grunt) {
             }
         },
 
-        shell: {
-            update: {
-                command: [
-                    'git pull',
-                    'npm install -g wh',
-                    'wh update',
-                    'npm install',
-                    'bower install'
-                ].join('&&')
-            }
-        },
-
         vulcanize: {
             default: {
                 options: {
@@ -99,7 +87,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-browserifying');
-    grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-vulcanize');
 
     grunt.registerTask('update', ['shell:update']);
