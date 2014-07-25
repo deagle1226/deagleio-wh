@@ -45,6 +45,7 @@
     "ws": "~0.4.31"
   },
   "devDependencies": {
+    "bluebird": "^2.2.2",
     "grunt-browserifying": "~1.0.8",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-sass": "~0.7.3",

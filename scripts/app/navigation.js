@@ -14,6 +14,7 @@ module.exports = (function() {
         };
         if (options.enter) enter();
         if (options.bindEvents) bindEvents(options.selectors);
+
     };
 
     function goTo(url) {
