@@ -378,6 +378,40 @@ module.exports.generator = function (config, logger, fileParser) {
   };
 
   /**
+  * Extracts a local theme zip into the current generator directory
+  * @param zipUrl   The location of the zip file on disk
+  * @param callback The callback to call with the data from the theme
+  */
+  var extractPresetLocal = function(fileData, callback) {
+
+    fs.writeFileSync('.preset.zip', fileData, { encoding: 'base64' });
+    // Unzip into temporary file
+    var zip = new Zip('.preset.zip');
+
+    var entries = zip.getEntries();
+
+    entries.forEach(function(entry) {
+      var newName = entry.entryName.split('/').slice(1).join('/');
+      entry.entryName = newName;
+    });
+    zip.extractAllTo('.', true);
+
+    fs.unlinkSync('.preset.zip');
+
+    if(fs.existsSync('.preset-data.json')) {
+      var presetData = fileParser.readJSON('.preset-data.json');
+
+      fs.unlinkSync('.preset-data.json');
+      logger.ok('Done extracting.');
+      callback(presetData);
+
+    } else {
+      logger.ok('Done extracting.');
+      callback(null);
+    }
+  }
+
+  /**
    * Downloads zip file and then sends the preset data for the theme to the CMS for installation
    * @param  {string}   zipUrl     Url to zip file to download
    * @param  {Function}   callback   Callback, first parameter is preset data to send to CMS
@@ -496,7 +530,7 @@ module.exports.generator = function (config, logger, fileParser) {
 
             if(typeInfo[objectName]) {
               typeInfo[objectName].controls.forEach(function(control) {
-                if(control.controlType === 'template') {
+                if(control.controlType === 'layout') {
                   templateWidgetName = control.name;
                 }
               });
@@ -520,7 +554,7 @@ module.exports.generator = function (config, logger, fileParser) {
                 var val = publishedItems[key];
 
                 if(templateWidgetName) {
-                  overrideFile = 'templates/' + objectName + '/templates/' + val[templateWidgetName];
+                  overrideFile = 'templates/' + objectName + '/layouts/' + val[templateWidgetName];
                 }
 
                 newPath = baseNewPath + '/' + slug(val.name).toLowerCase() + '/index.html';
@@ -538,7 +572,7 @@ module.exports.generator = function (config, logger, fileParser) {
                 var val = items[key];
 
                 if(templateWidgetName) {
-                  overrideFile = 'templates/' + objectName + '/templates/' + val[templateWidgetName];
+                  overrideFile = 'templates/' + objectName + '/layouts/' + val[templateWidgetName];
                 }
 
                 newPath = previewPath + '/' + val.preview_url + '/index.html';
@@ -549,7 +583,7 @@ module.exports.generator = function (config, logger, fileParser) {
                   writeTemplate(file, newPath, { item: val });
                 }
               }
-            } else if(filePath.indexOf('templates/' + objectName + '/templates') !== 0) { // Handle sub pages in here
+            } else if(filePath.indexOf('templates/' + objectName + '/layouts') !== 0) { // Handle sub pages in here
               baseNewPath = newPath;
 
               var middlePathName = filePath.replace('templates/' + objectName, '') + '/' + baseName;
@@ -830,10 +864,7 @@ module.exports.generator = function (config, logger, fileParser) {
         if(message.indexOf('scaffolding:') === 0)
         {
           var name = message.replace('scaffolding:', '');
-            console.log(name);
           self.makeScaffolding(name, function(individualMD5, listMD5, oneOffMD5) {
-            console.log(name);
-            console.log(oneOffMD5);
             sock.send('done:' + JSON.stringify({ individualMD5: individualMD5, listMD5: listMD5, oneOffMD5: oneOffMD5 }));
           });
         } else if (message.indexOf('scaffolding_force:') === 0) {
@@ -857,7 +888,7 @@ module.exports.generator = function (config, logger, fileParser) {
         } else if (message === 'supported_messages') {
           sock.send('done:' + JSON.stringify([
             'scaffolding', 'scaffolding_force', 'check_scaffolding', 'reset_files', 'supported_messages',
-            'push', 'build', 'preset'
+            'push', 'build', 'preset', 'layouts', 'preset_localv2'
           ]));
         } else if (message === 'push') {
           pushSite(function(error) {
@@ -869,6 +900,24 @@ module.exports.generator = function (config, logger, fileParser) {
           });
         } else if (message === 'build') {
           buildQueue.push({}, function(err) {});
+        } else if (message.indexOf('preset_local:') === 0) {
+          var fileData = message.replace('preset_local:', '');
+
+          if(!fileData) {
+            sock.send('done');
+            return;
+          }
+
+          extractPresetLocal(fileData, function(data) {
+            var command = spawn('npm', ['install'], {
+              stdio: 'inherit',
+              cwd: '.'
+            });
+
+            command.on('close', function() {
+              sock.send('done:' + JSON.stringify(data));
+            });
+          });
         } else if (message.indexOf('preset:') === 0) {
           var url = message.replace('preset:', '');
           if(!url) {

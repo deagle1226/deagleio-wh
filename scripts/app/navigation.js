@@ -8,8 +8,12 @@ module.exports = (function() {
     parcel.init = function(options) {
         this.goTo = goTo;
 
+        options.selectors = options.selectors || {
+            links: 'a.ajax',
+            home: 'a.home'
+        };
         if (options.enter) enter();
-        if (options.bindEvents) bindEvents();
+        if (options.bindEvents) bindEvents(options.selectors);
     };
 
     function goTo(url) {
@@ -28,8 +32,8 @@ module.exports = (function() {
         }
     }
 
-    function bindEvents() {
-        $('body').on('click', 'a.ajax', function(event) {
+    function bindEvents(selectors) {
+        $('body').on('click', selectors.links, function(event) {
             event.preventDefault();
             var url = $(this).attr('href');
 
@@ -39,7 +43,7 @@ module.exports = (function() {
             }
             if (url === '/') {
                 nav.find('a.active').removeClass('active');
-                nav.find('a.home').addClass('active');
+                nav.find(selectors.home).addClass('active');
             }
 
             goTo(url);
