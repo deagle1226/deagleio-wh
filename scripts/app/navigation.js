@@ -1,3 +1,12 @@
+var defaults = {
+    enter: true,
+    bindEvents: true,
+    selectors: {
+        links: 'a.ajax',
+        home: 'a.home'
+    }
+};
+
 module.exports = (function() {
 
     var parcel = {},
@@ -8,10 +17,7 @@ module.exports = (function() {
     parcel.init = function(options) {
         this.goTo = goTo;
 
-        options.selectors = options.selectors || {
-            links: 'a.ajax',
-            home: 'a.home'
-        };
+        options = $.extend({}, defaults, options);
         if (options.enter) enter();
         if (options.bindEvents) bindEvents(options.selectors);
 
