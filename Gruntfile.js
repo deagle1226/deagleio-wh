@@ -1,5 +1,8 @@
 module.exports = function(grunt) {
 
+    require('time-grunt')(grunt);
+    require('jit-grunt')(grunt);
+
     // ----------------------------------------------------------
     // WARNING, BRAVE DEVELOPER
     // ----------------------------------------------------------
@@ -85,11 +88,11 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-newer');
-    grunt.loadNpmTasks('grunt-browserifying');
-    grunt.loadNpmTasks('grunt-vulcanize');
+    // grunt.loadNpmTasks('grunt-contrib-sass');
+    // grunt.loadNpmTasks('grunt-contrib-jshint');
+    // grunt.loadNpmTasks('grunt-newer');
+    // grunt.loadNpmTasks('grunt-browserifying');
+    // grunt.loadNpmTasks('grunt-vulcanize');
 
     // NEVER REMOVE THESE LINES, OR ELSE YOUR PROJECT MAY NOT WORK
     require('./options/generatorOptions.js')(grunt);
