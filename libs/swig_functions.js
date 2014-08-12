@@ -189,7 +189,13 @@ module.exports.swigFunctions = function(swig) {
       tempData = _.omit(tempData, function(value, key) { return key.indexOf('_') === 0; });
 
       // convert it into an array
-      tempData = _.map(tempData, function(value, key) { value._id = key; value._type = name; if(value.name) value.slug = slugger(value.name).toLowerCase(); return value });
+      tempData = _.map(tempData, function(value, key) { 
+        value._id = key; 
+        value._type = name; 
+        if(value.name && !value.slug) 
+          value.slug = slugger(value.name).toLowerCase(); 
+        return value 
+      });
       tempData = _.filter(tempData, function(item) { 
         if(!item.publish_date) {
           return false;
@@ -270,6 +276,84 @@ module.exports.swigFunctions = function(swig) {
     return array[index];
   };
 
+  var sortItems = function(input, property, reverse) {
+
+    if(_.size(input) === 0) {
+      return input;
+    }
+
+    var first = input[0];
+    var sortProperty = '_sort_' + property;
+
+    if(first[sortProperty]) {
+      property = sortProperty;
+    }
+
+    if(reverse) {
+      return _.sortBy(input, property).reverse();
+    }
+    
+    return _.sortBy(input, property)
+  };
+
+  var nextItem = function(item, sort_name, reverse_sort) {
+    var type = item._type;
+    var items = getCombined(type);
+
+    if(sort_name) {
+      items = sortItems(items, sort_name, reverse_sort);
+    }
+
+    var nextItem = null;
+    var previousItem = null;
+
+    items.some(function(itm) {
+      if(previousItem && previousItem.name == item.name) {
+        nextItem = itm;
+        return true;
+      }
+
+      previousItem = itm;
+    });
+
+    return nextItem;
+  };
+
+  var prevItem = function(item, sort_name, reverse_sort) {
+    var type = item._type;
+    var items = getCombined(type);
+
+    if(sort_name) {
+      items = sortItems(items, sort_name, reverse_sort);
+    }
+
+    var returnItem = null;
+    var previousItem = null;
+
+    items.some(function(itm) {
+      if(itm.name == item.name) {
+        returnItem = previousItem;
+        return true;
+      }
+
+      previousItem = itm;
+    });
+
+    return returnItem;
+  };
+
+  var merge = function() {
+    var arrs = [].slice.call(arguments, 0);
+
+    var newArr = [];
+
+    arrs.forEach(function(arr) {
+      newArr = newArr.concat(arr);
+    })
+
+    return newArr;
+  }
+
   // FUNCTIONS USED FOR PAGINATION HELPING, IGNORE FOR MOST CASES
   this.shouldPaginate = function() {
     return self.curPage <= self.maxPage;
@@ -308,7 +392,10 @@ module.exports.swigFunctions = function(swig) {
       getCurrentUrl: getCurrentUrl,
       getSetting: getSetting,
       random: randomElement,
-      cmsVersion: 'v2'
+      cmsVersion: 'v2',
+      merge: merge,
+      nextItem: nextItem,
+      prevItem: prevItem
     };
   };
 

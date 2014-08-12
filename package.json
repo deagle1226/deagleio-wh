@@ -42,7 +42,8 @@
     "uslug": "~1.0.3",
     "win-spawn": "~2.0.0",
     "wrench": "~1.5.4",
-    "ws": "~0.4.31"
+    "ws": "~0.4.31",
+    "moment": "~2.8.1"
   },
   "devDependencies": {
     "bluebird": "^2.2.2",
