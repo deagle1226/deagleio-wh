@@ -38,11 +38,12 @@
     "proxy-middleware": "~0.5.0",
     "request": "~2.31.0",
     "swig": "~1.4.1",
-    "tiny-lr": "0.0.5",
+    "tiny-lr": "~0.1.0",
     "uslug": "~1.0.3",
     "win-spawn": "~2.0.0",
     "wrench": "~1.5.4",
-    "ws": "~0.4.31"
+    "ws": "~0.4.31",
+    "moment": "~2.8.1"
   },
   "devDependencies": {
     "bluebird": "^2.2.2",

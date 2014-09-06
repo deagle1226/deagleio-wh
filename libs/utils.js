@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var moment = require('moment');
 
 /**
  * Extends source dictionaries into the target dictionary
@@ -69,3 +70,52 @@ module.exports.slice = function(data, limit, offset) {
 module.exports.each = function(obj, cb) {
   _.each(obj, cb);
 };
+
+// Handle custom type path here
+// Basically, if there is a custom path defined, throw out newPath and construct it from base
+// newPath should be ./.build/<typename> so repace newPath.split('/')[2] with new thing
+
+// Support dates in the url and the typename
+// All refer to the publish date of the item
+// #Y - Year Full
+// #y - Year last two digits
+// #m - Month number, leading zero
+// #n - Month number, no leading zero
+// #F - Month name full (january, october, etc)
+// #M - Month short name (jan, oct, etc)
+// #d - Day leading zero
+// #j - Day, no leading zero
+// #T - The typename (e.g. articles)
+module.exports.parseCustomUrl = function(url, object) {
+  var publishDate = object.publish_date ? object.publish_date : object;
+
+   publishDate = moment(publishDate);
+
+  function replacer(match, timeIdent, offset, string){
+    if(timeIdent === 'Y') {
+      return publishDate.format('YYYY').toLowerCase();
+    } else if (timeIdent === 'y') {
+      return publishDate.format('YY').toLowerCase();
+    } else if (timeIdent === 'm') {
+      return publishDate.format('MM').toLowerCase();
+    } else if (timeIdent === 'n') {
+      return publishDate.format('M').toLowerCase();
+    } else if (timeIdent === 'F') {
+      return publishDate.format('MMMM').toLowerCase();
+    } else if (timeIdent === 'M') {
+      return publishDate.format('MMM').toLowerCase();
+    } else if (timeIdent === 'd') {
+      return publishDate.format('DD').toLowerCase();
+    } else if (timeIdent === 'j') {
+      return publishDate.format('D').toLowerCase();
+    } else if (timeIdent === 'T') {
+      return object._type.toLowerCase();
+    } else {
+      return match;
+    }
+  }
+
+  url = url.replace(/#(\w)/g, replacer);
+
+  return url;
+}

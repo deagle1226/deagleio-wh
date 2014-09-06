@@ -1,10 +1,9 @@
-{% set about = get('aboutme') %}
 {% extends "templates/partials/base.html" %}
 {% block content %}
 
 <article id="aboutme">
-   	<img class="profile" src="{{ about.image|imageCrop(68) }}" />
-   	{{ about.body|markdown }}
+   	<img class="profile" src="{{ cms.aboutme.image|imageCrop(68) }}" />
+   	{{ cms.aboutme.body|markdown }}
 </article>
 
 {% endblock %}

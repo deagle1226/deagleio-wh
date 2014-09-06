@@ -1,14 +1,10 @@
-{% set experiences = get('workexperiences') %}
-{% set skills = get('skills') %}
-{% set education = get('education') %}
-
 {% extends "templates/partials/base.html" %}
 {% block content %}
 <section id="resume">
 	<article>
 	   	<h3>Work Experiences</h3>
 
-		{% for experience in experiences %}
+		{% for experience in cms.workexperiences %}
 	  	<div>
 	  		<h5>{{ experience.name|title }}</h5>
 	  		<h5 class="sub">{{ experience.employer|upper }} ({{ experience.address.city }}, {{ experience.address.state }})</h5>
@@ -22,13 +18,13 @@
 	<article>
 		<h3>Skills</h3>
 
-		{{ skills.list|markdown }}
+		{{ cms.skills.list|markdown }}
 	</article>
 
 	<article>
 		<h3>Education</h3>
 
-		{% for thing in education %}
+		{% for thing in cms.education %}
 		<div>
 			<h5>{{ thing.name }} ({{ thing.address.city }}, {{ thing.address.state }})</h5>
 			{{ thing.description|markdown }}
