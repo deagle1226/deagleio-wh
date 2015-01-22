@@ -2,6 +2,10 @@ var fs = require('fs');
 var url = require('url');
 var header = require('connect-header');
 
+var unescapeSite = function(site) {
+  return site.replace(/,1/g, '.');
+}
+
 module.exports = function(grunt) {
 
   var conf = {};
@@ -32,29 +36,28 @@ module.exports = function(grunt) {
           hostname: '*',
           base: '.build',
           livereload: 35730,
-          middleware: function(connect, options) {
+          middleware: function(connect, options, middlewares) {
             // Return array of whatever middlewares you want
-            return [
-              header({ 'X-Webhook-Local' : true }),
-              connect.static(options.base),
-              require('grunt-connect-proxy/lib/utils').proxyRequest,
-              function(req, res, next) {
-                if ('GET' != req.method && 'HEAD' != req.method) return next();
+            middlewares.unshift(header({ 'X-Webhook-Local' : true }));
+            middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+            middlewares.push(function(req, res, next) {
+              if ('GET' != req.method && 'HEAD' != req.method) return next();
 
-                var contents = fs.readFileSync('./libs/debug404.html');
-                res.end(contents);
-              },
-            ];
+              var contents = fs.readFileSync('./libs/debug404.html');
+              res.end(contents);
+            });
+            
+            return middlewares;
           }
         },
         proxies: [
             {
                 context: '/webhook-uploads',
-                host:  conf.siteName + '.webhook.org',
+                host:  conf.custom ? unescapeSite(conf.siteName) : (conf.siteName + '.webhook.org'),
                 port: 80,
                 changeOrigin: true,
                 headers: {
-                  host: conf.siteName + '.webhook.org'
+                  host: conf.custom ? unescapeSite(conf.siteName) : (conf.siteName + '.webhook.org')
                 }
             }
         ]

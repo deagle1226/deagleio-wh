@@ -358,7 +358,7 @@ body {
   font-family: "Titillium Web", sans-serif;
   -webkit-text-stroke: 0.2px;
   font-size: 14px;
-  color: #555555;
+  color: #555;
   background: #e5e5e5; }
 
 .uppercase {
@@ -393,7 +393,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.5;
     font-size: 75%; }
   h1.underline, h2.underline, h3.underline, h4.underline, h5.underline, h6.underline {
-    border-bottom: 3px solid #555555;
+    border-bottom: 3px solid #555;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -737,10 +737,8 @@ nav {
 @-webkit-keyframes move {
   0% {
     left: -7px; }
-
   70% {
     left: calc(100% + 7px); }
-
   100% {
     left: calc(100% + 7px); } }
 .modal-box {
@@ -808,7 +806,7 @@ footer {
   transition: all 100ms ease-in-out;
   white-space: nowrap; }
   #logo a {
-    color: #555555;
+    color: #555;
     text-decoration: none; }
   #logo span {
     display: inline-block;
@@ -1007,3 +1005,5 @@ main {
     #projects article time {
       float: right;
       color: rgba(85, 85, 85, 0.5); }
+
+/*# sourceMappingURL=main.css.map */

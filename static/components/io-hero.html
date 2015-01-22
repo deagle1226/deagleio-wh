@@ -1,0 +1,50 @@
+<link rel="import" href="../bower/polymer/polymer.html">
+
+<polymer-element name="io-hero" attributes="name blurb">
+    <template>
+        <style>
+            :host {
+                background: #555;
+                color: #fff;
+                display: block;
+                overflow: hidden;
+                text-align: center;
+            }
+
+            .hidden {
+                opacity: 0;
+            }
+
+            h2 {
+                opacity: 1;
+                transition: opacity 500ms ease;
+                transition-delay: 1s;
+            }
+
+            div {
+                transition: all 500ms ease-out;
+                position: relative;
+            }
+
+            div.slide-down { 
+                transform: translateY(-200px);
+            }
+        </style>
+        <div id="div" class="slide-down">
+            <h1>{{ name }}</h1>
+            <h2 class="hidden" id="h2">{{ blurb }}</h2>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        name: "Default Title",
+        blurb: "Default Blurb",
+        ready: function() {
+            setTimeout(function() {
+                this.$.div.className = "";
+                this.$.h2.className = "";
+            }.bind(this), 250);
+        }
+    });
+    </script>
+</polymer-element>
