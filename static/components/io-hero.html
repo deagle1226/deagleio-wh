@@ -10,41 +10,89 @@
                 overflow: hidden;
                 text-align: center;
             }
+            
+            @-webkit-keyframes bounceInDown {
+              0%, 60%, 75%, 90%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+              }
 
-            .hidden {
+              0% {
                 opacity: 0;
-            }
+                -webkit-transform: translate3d(0, -3000px, 0);
+              }
 
-            h2 {
+              60% {
                 opacity: 1;
-                transition: opacity 500ms ease;
-                transition-delay: 1s;
-            }
+                -webkit-transform: translate3d(0, 25px, 0);
+              }
 
-            div {
-                transition: all 500ms ease-out;
-                position: relative;
-            }
+              75% {
+                -webkit-transform: translate3d(0, -10px, 0);
+              }
 
-            div.slide-down { 
-                transform: translateY(-200px);
+              90% {
+                -webkit-transform: translate3d(0, 5px, 0);
+              }
+
+              100% {
+                -webkit-transform: none;
+              }
+            }
+            @-webkit-keyframes bounceIn {
+              0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+              }
+
+              0% {
+                opacity: 0;
+                transform: scale3d(.3, .3, .3);
+              }
+
+              20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+              }
+
+              40% {
+                transform: scale3d(.9, .9, .9);
+              }
+
+              60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+              }
+
+              80% {
+                transform: scale3d(.97, .97, .97);
+              }
+
+              100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+              }
+            }
+            .slide-down h1 {
+                -webkit-transform: translate3d(0, -3000px, 0);
+                -webkit-animation: bounceInDown 700ms;
+                -webkit-animation-delay: 500ms;
+                -webkit-animation-fill-mode: forwards;
+            }
+            .slide-down h2 {
+                transform: scale3d(0, 0, 0); 
+                -webkit-animation: bounceIn 500ms;
+                -webkit-animation-delay: 1200ms;
+                -webkit-animation-fill-mode: forwards;
             }
         </style>
-        <div id="div" class="slide-down">
+        <div class="slide-down">
             <h1>{{ name }}</h1>
-            <h2 class="hidden" id="h2">{{ blurb }}</h2>
+            <h2>{{ blurb }}</h2>
         </div>
     </template>
     <script>
     Polymer({
         name: "Default Title",
-        blurb: "Default Blurb",
-        ready: function() {
-            setTimeout(function() {
-                this.$.div.className = "";
-                this.$.h2.className = "";
-            }.bind(this), 250);
-        }
+        blurb: "Default Blurb"
     });
     </script>
 </polymer-element>

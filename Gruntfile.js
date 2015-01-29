@@ -70,7 +70,7 @@ module.exports = function(grunt) {
                 tasks: ['newer:jshint', 'browserifying:dev', 'build']
             },
             html: {
-                files: ['static/imports/link_map.html', 'pages/*.html', 'static/components/*.html'],
+                files: ['static/imports/link_map.html', 'pages/*.html'],
                 tasks: ['vulcanize', 'build']
             }
         },
