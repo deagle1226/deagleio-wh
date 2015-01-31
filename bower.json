@@ -18,7 +18,8 @@
   "dependencies": {
     "polymer": "Polymer/polymer",
     "core-elements": "Polymer/core-elements",
-    "paper-elements": "Polymer/paper-elements"
+    "paper-elements": "Polymer/paper-elements",
+    "animate.css": "~3.2.0"
   },
   "resolutions": {
     "polymer": "0.5.4",

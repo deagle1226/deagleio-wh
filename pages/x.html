@@ -13,15 +13,18 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700|Roboto:400,100,300|Roboto+Condensed:400,300|Roboto+Slab:400,100' rel='stylesheet' type='text/css'>
+    <link href="/static/bower/animate.css/animate.css" rel="stylesheet" type="text/css">
     <script src="/static/bower/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="/static/components/io-hero.html">
+    <link rel="import" href="/static/components/io-card.html">
 
     <style>
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
+            background: #eee;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -30,7 +33,27 @@
     <header>
     </header>
     <main>
-        <io-hero name="Dan Eagle" blurb="Lorem ipsum dolor sit amet"></io-hero>
+        <io-hero name="Dan Eagle">
+            Lorem ipsum dolor sit amet
+        </io-hero>
+        <io-card>
+            <h1>Lorem</h1>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </io-card>
+        <io-card>
+            <h1>Lorem</h1>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </io-card>
     </main>
 </body>
 
