@@ -1,0 +1,62 @@
+<link rel="import" href="../bower/polymer/polymer.html">
+
+<polymer-element name="io-header">
+    <template>
+        <style>
+            :host {
+                background: #555;
+                color: #fff;
+                display: block;
+            }
+
+            header > a {
+                color: #fff;
+                text-decoration: none;
+                font-weight: 300;
+                font-family: 'Roboto Condensed', sans-serif;
+                font-size: 20px;
+                line-height: 2;
+            }
+
+            header > a:before {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 100;
+                background: #fff;
+                border-radius: 50%;
+                color: #555;
+                content: '{{ abbr }}';
+                width: 25px;
+                height: 25px;
+                display: inline-block;
+                text-align: center;
+                line-height: 25px;
+                font-size: 13px;
+                vertical-align: text-bottom;
+                margin: 0 5px;
+            }
+
+            header > nav {
+                text-align: center;
+                text-indent: -105px
+            }
+
+            header > nav a {
+                color: #fff;
+                text-decoration: none;
+            }
+        </style>
+        <header layout horizontal center>
+            <a href="/">{{ name }}</a>
+
+            <nav flex>
+                <a href="/x">X</a>
+            </nav>
+        </header>
+    </template>
+    <script>
+    Polymer({
+        name: 'deagle.io',
+        abbr: 'io'
+    });
+    </script>
+</polymer-element>
