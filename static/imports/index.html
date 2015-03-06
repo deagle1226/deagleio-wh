@@ -475,7 +475,6 @@ Example setting size to 32px x 32px:
 The core elements include several sets of icons. 
 To use the default set of icons, import  `core-icons.html` and use the `icon` attribute to specify an icon:
 
-    &lt;!-- import default iconset and core-icon --&gt;
     <link rel="import" href="/components/core-icons/core-icons.html">
 
     <core-icon icon="menu"></core-icon>
@@ -483,7 +482,6 @@ To use the default set of icons, import  `core-icons.html` and use the `icon` at
 To use a different built-in set of icons, import  `core-icons/<iconset>-icons.html`, and
 specify the icon as `<iconset>:<icon>`. For example:
 
-    &lt;!-- import communication iconset and core-icon --&gt;
     <link rel="import" href="/components/core-icons/communication-icons.html">
 
     <core-icon icon="communication:email"></core-icon>
@@ -1886,10 +1884,10 @@ To change the ink color:
 </polymer-element>
 
 
-<polymer-element name="paper-tabs" extends="core-selector" attributes="noink nobar noslide scrollable hideScrollButton" role="tablist" horizontal="" center="" layout="" assetpath="../bower/paper-tabs/">
+<polymer-element name="paper-tabs" extends="core-selector" attributes="noink nobar noslide scrollable hideScrollButton alignBottom" role="tablist" horizontal="" center="" layout="" assetpath="../bower/paper-tabs/">
 <template>
 
-  <style>:host{display:block;font-size:14px;font-weight:500;height:48px;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}#tabsContainer{position:relative;height:100%;white-space:nowrap;overflow:hidden}#tabsContent{height:100%}#tabsContainer.scrollable>#tabsContent{position:absolute;white-space:nowrap}.scroll-button{width:40px;padding:0 12px}.scroll-button>paper-icon-button{transition:opacity .18s}.scroll-button>.hidden{opacity:0}#selectionBar{position:absolute;height:2px;bottom:0;left:0;width:0;background-color:#ffff8d;transition:width,left}#selectionBar.expand{transition-duration:.15s;transition-timing-function:cubic-bezier(0.4,0,1,1)}#selectionBar.contract{transition-duration:.18s;transition-timing-function:cubic-bezier(0,0,.2,1)}polyfill-next-selector{content:'#tabsContent > *:not(#selectionBar)'}::content>*{height:100%}</style>
+  <style>:host{display:block;font-size:14px;font-weight:500;height:48px;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}#tabsContainer{position:relative;height:100%;white-space:nowrap;overflow:hidden}#tabsContent{height:100%}#tabsContainer.scrollable>#tabsContent{position:absolute;white-space:nowrap}.scroll-button{width:40px;padding:0 12px}.scroll-button>paper-icon-button{transition:opacity .18s}.scroll-button>.hidden{opacity:0}#selectionBar{position:absolute;height:2px;bottom:0;left:0;width:0;background-color:#ffff8d;transition:width,left}#selectionBar.alignBottom{top:0;bottom:auto}#selectionBar.expand{transition-duration:.15s;transition-timing-function:cubic-bezier(0.4,0,1,1)}#selectionBar.contract{transition-duration:.18s;transition-timing-function:cubic-bezier(0,0,.2,1)}polyfill-next-selector{content:'#tabsContent > *:not(#selectionBar)'}::content>*{height:100%}</style>
   
   <div class="scroll-button" hidden?="{{!scrollable || hideScrollButton}}">
     <paper-icon-button icon="chevron-left" class="{{ {hidden: leftHidden} | tokenList }}" on-down="{{holdLeft}}" on-up="{{releaseHold}}"></paper-icon-button>
@@ -1899,7 +1897,7 @@ To change the ink color:
   
     <div id="tabsContent" horizontal="" layout?="{{!scrollable}}">
       <shadow></shadow>
-      <div id="selectionBar" hidden?="{{nobar}}" on-transitionend="{{barTransitionEnd}}"></div>
+      <div id="selectionBar" hidden?="{{nobar}}" class="{{ {alignBottom: alignBottom} | tokenList }}" on-transitionend="{{barTransitionEnd}}"></div>
     </div>
     
   </div>

@@ -7,6 +7,9 @@
                 background: #555;
                 color: #fff;
                 display: block;
+                position: fixed;
+                z-index: 99;
+                top: 0; left: 0; right: 0;
             }
 
             header > a {
@@ -20,7 +23,7 @@
 
             header > a:before {
                 font-family: 'Roboto', sans-serif;
-                font-weight: 100;
+                font-weight: 300;
                 background: #fff;
                 border-radius: 50%;
                 color: #555;
@@ -37,19 +40,32 @@
 
             header > nav {
                 text-align: center;
-                text-indent: -105px
+                padding-right: 105px
             }
 
-            header > nav a {
+            ::content a {
                 color: #fff;
                 text-decoration: none;
+                font-weight: 300;
+                font-family: 'Roboto', sans-serif;
+                line-height: 40px;
+                display: inline-block;
+                padding: 0px 5px;
+            }
+
+            ::content a:hover {
+                color: #eee;
+            }
+
+            ::content a.active {
+                box-shadow: inset 0px 3px 0px 0px rgba(255,255,255,1);
             }
         </style>
         <header layout horizontal center>
             <a href="/">{{ name }}</a>
 
             <nav flex>
-                <a href="/x">X</a>
+                <content></content>
             </nav>
         </header>
     </template>

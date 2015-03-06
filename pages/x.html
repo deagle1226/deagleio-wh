@@ -26,18 +26,29 @@
             font-family: 'Roboto', sans-serif;
             background: #eee;
             font-size: 14px;
+            padding-top: 40px;
+        }
+
+        main {
+            width: 100%;
+            overflow: hidden;
         }
     </style>
 </head>
 
 <body unresolved>
-    <io-header></io-header>
+    <io-header>
+        <a href="/">Home</a>
+        <a href="/x" class="active">&gt;X&lt;</a>
+        <a href="#">Something</a>
+    </io-header>
     <main>
         <io-hero name="Dan Eagle">
             Lorem ipsum dolor sit amet
         </io-hero>
         <io-card>
             <h1>Lorem</h1>
+            <time>Today</time>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -47,6 +58,7 @@
         </io-card>
         <io-card>
             <h1>Lorem</h1>
+            <time>2.8.15</time>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

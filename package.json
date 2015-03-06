@@ -44,7 +44,8 @@
     "wrench": "~1.5.4",
     "ws": "~0.4.31",
     "moment": "~2.8.1",
-    "cheerio": "~0.18.0"
+    "cheerio": "~0.18.0",
+    "nodejs-websocket": "~1.2.0"
   },
   "devDependencies": {
     "bluebird": "^2.2.2",
