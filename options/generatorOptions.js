@@ -59,11 +59,11 @@ module.exports = function(grunt) {
         proxies: [
             {
                 context: '/webhook-uploads',
-                host:  conf.custom ? unescapeSite(conf.siteName) : (conf.siteName + '.webhook.org'),
+                host: conf.imageproxy ? conf.imageproxy : (conf.custom ? unescapeSite(conf.siteName) : (conf.siteName + '.webhook.org')),
                 port: 80,
                 changeOrigin: true,
                 headers: {
-                  host: conf.custom ? unescapeSite(conf.siteName) : (conf.siteName + '.webhook.org')
+                  host: conf.imageproxy ? conf.imageproxy : (conf.custom ? unescapeSite(conf.siteName) : (conf.siteName + '.webhook.org'))
                 }
             }
         ]
@@ -71,8 +71,12 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      'wh-watch-static': {
+        files: ['static/**/*'],
+        tasks: ['build-static']
+      },
       'wh-watch': {
-        files: ['pages/**/*', 'templates/**/*', 'static/**/*'],
+        files: ['pages/**/*', 'templates/**/*'],
         tasks: ['build']
       }
     },

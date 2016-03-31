@@ -1,5 +1,5 @@
 
-var curVersion = 'v53';
+var curVersion = 'v55';
 
 var request = require('request');
 
@@ -108,6 +108,26 @@ module.exports = function(grunt) {
     generator.cleanFiles(done);
   });
 
+  grunt.registerTask('build-static', 'Just builds the static files, meant to be used with watch tasks.', function() {
+    var done = this.async();
+
+    var strict = grunt.option('strict');
+
+    if(strict === true) {
+      generator.enableStrictMode();
+    }
+
+    var production = grunt.option('production');
+
+    if(production === true) {
+      generator.enableProduction();
+    }
+
+    checkVersion(function() {
+      generator.buildStatic(done);
+    })
+  });
+
   // Build Task.
   grunt.registerTask('build', 'Clean files and then generate static site into build', function() {
     var done = this.async();
@@ -150,10 +170,11 @@ module.exports = function(grunt) {
 
     var sitename = grunt.option('sitename');
     var secretkey = grunt.option('secretkey');
+    var server = grunt.option('server');
     var copyCms = grunt.option('copycms');
     var firebase = grunt.option('firebase');
 
-    generator.init(sitename, secretkey, copyCms, firebase, done);
+    generator.init(sitename, secretkey, copyCms, firebase, server, done);
   });
 
   // Check if initialized properly before running all these tasks
